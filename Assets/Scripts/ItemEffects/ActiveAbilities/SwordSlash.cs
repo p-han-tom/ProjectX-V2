@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordSlash : ActiveAbility
 {
-    protected override void StartAbility() {
+    protected override void StartActiveAbility() {
         name = "SwordSlash";
         cooldown = 0f;
     }

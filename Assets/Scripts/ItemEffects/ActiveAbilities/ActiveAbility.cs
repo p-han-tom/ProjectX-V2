@@ -7,8 +7,8 @@ public abstract class ActiveAbility : ItemEffect
     protected float cooldown;
     void Start()
     {
-        StartAbility();
+        StartActiveAbility();
     }
     public abstract void Cast();
-    protected abstract void StartAbility();
+    protected abstract void StartActiveAbility();
 }
