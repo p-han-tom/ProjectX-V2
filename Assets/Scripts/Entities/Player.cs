@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
 
-    // Movement
-    Vector2 movement;
-    float movementSpeed = 5f;
+    protected override void CustomStart() {
+        movementSpeed = 5f;
+    }
 
-    // Components
-    Rigidbody2D rb;
-
-    void Start()
+    protected override void CustomUpdate()
     {
-        rb = GetComponent<Rigidbody2D>();
+        CheckInput();
+        Move();
     }
 
     void CheckInput() {
@@ -26,9 +24,5 @@ public class Player : MonoBehaviour
         rb.velocity = movement * movementSpeed;
     }
 
-    void Update()
-    {
-        CheckInput();
-        Move();
-    }
+    
 }
