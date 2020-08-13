@@ -15,6 +15,10 @@ public abstract class Entity : MonoBehaviour
     protected float maxHP;
     protected float currentHP;
 
+    // Abilities
+    [SerializeField]
+    protected Ability[] abilityList;
+
     protected virtual void CustomStart() {}
     protected virtual void CustomUpdate() {}
 

@@ -33,7 +33,7 @@ public abstract class Ability : MonoBehaviour
             Debug.Log("Ability has " + (cooldown - cooldownElapsed) + "s remaining");
         }
     }
-    private void UpdateCooldown()
+    void UpdateCooldown()
     {
         if (cooldownElapsed > 0f) cooldownElapsed -= Time.deltaTime;
     }

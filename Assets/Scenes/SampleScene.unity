@@ -130,9 +130,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 253775727}
+  - component: {fileID: 253775724}
   - component: {fileID: 253775726}
   - component: {fileID: 253775725}
-  - component: {fileID: 253775724}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ef6cd1a02a7e945891f11f0029a756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityList: []
 --- !u!61 &253775725
 BoxCollider2D:
   m_ObjectHideFlags: 0
