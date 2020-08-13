@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public ItemData item;
+    public Ability ability;
     SpriteRenderer spriteRenderer;
     void Start()
     {

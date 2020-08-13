@@ -19,11 +19,11 @@ public class Player : Entity
     protected override void CustomUpdate()
     {
         CheckInput();
+        RotateWeapon();
     }
 
     void FixedUpdate() {
         Move();
-
     }
 
     void CheckInput() {
@@ -31,9 +31,6 @@ public class Player : Entity
         movement.y = Input.GetAxisRaw("Vertical");
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction = new Vector2 (mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
-        pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
-
-        pivot.up = direction;
     }
 
     void Move() {
@@ -45,6 +42,11 @@ public class Player : Entity
         } else {
             animator.SetBool("moving", false);
         }
+    }
+
+    void RotateWeapon() {
+        pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        pivot.up = direction;
     }
 
     

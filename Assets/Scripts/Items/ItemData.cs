@@ -12,7 +12,5 @@ public class ItemData : ScriptableObject
     public int rarity;
     public Sprite sprite;
 
-    public Ability ability;
-
 
 }
