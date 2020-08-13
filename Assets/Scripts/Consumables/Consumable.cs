@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Consumable : ItemEffect
+public abstract class Consumable : MonoBehaviour
 {
     void Start()
     {
-        StartConsumable();
+        CustomStart();
     }
     public abstract void Consume();
-    protected abstract void StartConsumable();
+    protected abstract void CustomStart();
 }
