@@ -6,6 +6,7 @@ public abstract class Entity : MonoBehaviour
 {
     // Components
     protected Rigidbody2D rb;
+    protected Animator animator;
 
     // Movement
     protected Vector2 movement;
@@ -24,6 +25,7 @@ public abstract class Entity : MonoBehaviour
 
     void Start()
     {
+        animator = transform.Find("Sprite").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         CustomStart();
     }
