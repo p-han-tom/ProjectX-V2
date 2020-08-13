@@ -40,7 +40,7 @@ public class Player : Entity
         rb.velocity = movement * movementSpeed;
 
         if (rb.velocity != Vector2.zero) {
-            transform.rotation = (movement.x > 0) ? Quaternion.Euler(0,180,0) : Quaternion.Euler(0,0,0);
+            transform.rotation = (movement.x < 0) ? Quaternion.Euler(0,180,0) : Quaternion.Euler(0,0,0);
             animator.SetBool("moving", true);
         } else {
             animator.SetBool("moving", false);
