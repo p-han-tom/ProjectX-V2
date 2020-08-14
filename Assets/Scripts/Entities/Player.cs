@@ -20,6 +20,10 @@ public class Player : Entity
     {
         CheckInput();
         RotateWeapon();
+
+        if (Input.GetMouseButton(0)) {
+            abilityList[0].Cast(direction, mousePos, transform);
+        }
     }
 
     void FixedUpdate() {

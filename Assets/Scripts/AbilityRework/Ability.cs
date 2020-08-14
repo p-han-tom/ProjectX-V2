@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
-
 public abstract class Ability : ScriptableObject
 {
-    public new string name = "New Ability";
-    public abstract float GetCooldown();
-    public abstract float GetDamage();
+
+    [Header("Essentials")]
+    public new string name;
+    public float cooldown;
+    public float castTime;
+    public float damage;
+    public AbilityType abilityType;
+    public enum AbilityType {IsCharged, IsCast, IsToggled}
+
+    public GameObject prefab;
+
+
 
     public abstract void Cast(Vector2 direction, Vector3 mousePos, Transform source);
 

@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: e51006953c71eea4383b331abb2b096f
+guid: f96c4300a8823814b9726b3503f993c7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - fireballProjectile: {fileID: 1699840863522557859, guid: fa9b3ecd371ac3040a616fa7e26aa4dc,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
