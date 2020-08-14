@@ -9,13 +9,12 @@ public class ProjectileAbility : Ability
     public float speed;
     public GameObject onHitParticles;
 
-    public override void Cast(Vector2 direction, Vector3 mousePos, Transform source) {
-        ProjectileBehaviour projectileBehaviour = prefab.GetComponent<ProjectileBehaviour>();
-
-        Instantiate(prefab, source.position, Quaternion.identity);
+    public override void Cast(Vector2 direction, Vector3 mousePos, Transform source)
+    {
+        GameObject prefabInstance = Instantiate(prefab, source.position, Quaternion.identity);
+        ProjectileBehaviour projectileBehaviour = prefabInstance.GetComponent<ProjectileBehaviour>();
         projectileBehaviour.sourceLayer = source.gameObject.layer;
         projectileBehaviour.direction = direction;
         projectileBehaviour.speed = speed;
-
     }
 }
