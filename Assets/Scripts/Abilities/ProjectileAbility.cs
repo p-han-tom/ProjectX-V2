@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Projectile Ability", menuName = "Projectile Ability")]
+[CreateAssetMenu(fileName = "New Projectile Ability", menuName = "Ability/Projectile")]
 public class ProjectileAbility : Ability
 {
     [Header("Projectile values")]
