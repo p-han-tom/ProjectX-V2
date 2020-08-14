@@ -16,5 +16,7 @@ public class ProjectileAbility : Ability
         projectileBehaviour.sourceLayer = source.gameObject.layer;
         projectileBehaviour.direction = direction;
         projectileBehaviour.speed = speed;
+
+        EquipSprite(source);
     }
 }

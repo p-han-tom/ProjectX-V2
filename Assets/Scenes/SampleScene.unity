@@ -1181,10 +1181,36 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643670512234612000, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643670512234612000, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643670512234612000, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -45
+      objectReference: {fileID: 0}
     - target: {fileID: 3643670512234612001, guid: 08ca958efd103234dbf36529ecc99802,
         type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643670512234612001, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 12086cdfa1a9a834ebbd7e50e13ec053,
+        type: 3}
+    - target: {fileID: 3643670512234612003, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3643670512306859361, guid: 08ca958efd103234dbf36529ecc99802,
         type: 3}
@@ -1244,7 +1270,7 @@ PrefabInstance:
     - target: {fileID: 3643670512306859362, guid: 08ca958efd103234dbf36529ecc99802,
         type: 3}
       propertyPath: abilityList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3643670512306859362, guid: 08ca958efd103234dbf36529ecc99802,
         type: 3}
@@ -1252,10 +1278,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 91fabdc22fd3a8e4086e247676f57ae9,
         type: 2}
+    - target: {fileID: 3643670512306859362, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: abilityList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e13770b75b5cec44b343d9cb9268727,
+        type: 2}
     - target: {fileID: 3643670512306859365, guid: 08ca958efd103234dbf36529ecc99802,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643670512757560543, guid: 08ca958efd103234dbf36529ecc99802,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08ca958efd103234dbf36529ecc99802, type: 3}

@@ -14,6 +14,8 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(sourceLayer.value, gameObject.layer);
         rb = GetComponent<Rigidbody2D>();
+
+        
     }
 
     void Update()

@@ -23,6 +23,9 @@ public class Player : Entity
 
         if (Input.GetMouseButtonDown(0)) {
             abilityList[0].Cast(direction, mousePos, transform);
+        } 
+        if (Input.GetMouseButtonDown(1)) {
+            abilityList[1].Cast(direction, mousePos, transform);
         }
     }
 
