@@ -13,5 +13,6 @@ public class MeleeAbility : Ability
         MeleeBehaviour meleeBehaviour = prefabInstance.GetComponent<MeleeBehaviour>();
         meleeBehaviour.RotateTowards(direction);
         prefabInstance.transform.position += distanceFromCaster * new Vector3(direction.x, direction.y, source.position.z);
+        EquipSprite(source);
     }
 }
