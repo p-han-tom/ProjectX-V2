@@ -17,14 +17,14 @@ public abstract class Entity : MonoBehaviour
     protected float currentHP;
 
     // Abilities
-    [SerializeField]
-    protected Ability[] abilityList = new Ability[4];
+    protected ActiveItems activeItems;
 
     protected virtual void CustomStart() {}
     protected virtual void CustomUpdate() {}
 
     void Start()
     {
+        activeItems = GetComponent<ActiveItems>();
         animator = transform.Find("Sprites").Find("Sprite").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         CustomStart();

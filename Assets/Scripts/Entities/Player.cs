@@ -8,14 +8,9 @@ public class Player : Entity
     Vector3 mousePos;
     Vector2 direction;
     List<Item> nearbyItems = new List<Item>();
-    GameItem[] activeItems = new GameItem[4];
-    KeyCode[] keyBindings = {KeyCode.Mouse0, KeyCode.Mouse1, KeyCode.LeftShift, KeyCode.R};
+
     // Children
     Transform pivot;
-
-    // Abilities
-    bool abilityTriggered;
-    int triggeredAbility;
 
     protected override void CustomStart()
     {
@@ -27,17 +22,6 @@ public class Player : Entity
     {
         CheckInput();
         RotateWeapon();
-        if (abilityTriggered) {
-            if ((int)abilityList[triggeredAbility].abilityType == 0) {
-                StartCoroutine(Cast(abilityList[triggeredAbility].castTime, triggeredAbility));
-                abilityTriggered = false;
-            } else if ((int)abilityList[triggeredAbility].abilityType == 1) {
-                Charge(keyBindings[triggeredAbility], triggeredAbility);
-                Debug.Log("finished charge");
-            } else if ((int)abilityList[triggeredAbility].abilityType == 2) {
-
-            }
-        }
     }
 
     void FixedUpdate()
@@ -52,17 +36,6 @@ public class Player : Entity
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            abilityTriggered = true;
-            triggeredAbility = 0;
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            abilityTriggered = true;
-            triggeredAbility = 1;
-        }
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             PickupItem();
@@ -73,9 +46,8 @@ public class Player : Entity
         if (nearbyItems.Count > 0) {
             Item pickingUpItem = nearbyItems[0];
             for (int i = 0; i < 4; i ++) {
-                if (activeItems[i] == null) {
-                    activeItems[i] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
-                    abilityList[i] = activeItems[i].GetAbility();
+                if (activeItems.items[i] == null) {
+                    activeItems.items[i] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
                     break;
                 }
             }
@@ -116,22 +88,5 @@ public class Player : Entity
         if (other.GetComponent<Item>() != null) {
             nearbyItems.Remove(other.GetComponent<Item>());
         }
-    }
-
-    IEnumerator Cast(float castTime, int index) {
-        yield return new WaitForSeconds(castTime);
-        abilityList[index].Cast(direction, mousePos, transform, activeItems[index].GetAbilityLevel());
-        abilityTriggered = false;
-    }
-
-    void Charge(KeyCode key, int index) {
-        if (Input.GetKeyUp(key)) {
-            abilityList[index].Cast(direction, mousePos, transform, activeItems[index].GetAbilityLevel());
-            abilityTriggered = false;
-        }
-    }
-
-    void Channel(float castTime, GameItem item) {
-
     }
 }
