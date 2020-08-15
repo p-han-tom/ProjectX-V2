@@ -14,7 +14,7 @@ public class Player : Entity
 
     protected override void CustomStart()
     {
-        movementSpeed = 5f;
+        movementSpeed = new Stat(5f);
         pivot = transform.Find("Pivot");
     }
 
@@ -70,7 +70,7 @@ public class Player : Entity
     }
     void Move()
     {
-        rb.velocity = movement * movementSpeed;
+        rb.velocity = movement * movementSpeed.value();
 
         if (rb.velocity != Vector2.zero)
         {

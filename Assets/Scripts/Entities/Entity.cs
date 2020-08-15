@@ -10,10 +10,10 @@ public abstract class Entity : MonoBehaviour
 
     // Movement
     protected Vector2 movement;
-    protected float movementSpeed;
+    protected Stat movementSpeed;
 
     // Stats
-    protected float maxHP;
+    protected Stat maxHP;
     protected float currentHP;
 
     // Abilities
