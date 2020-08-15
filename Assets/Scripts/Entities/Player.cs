@@ -57,7 +57,9 @@ public class Player : Entity
             activeItems[0] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
             abilityList[0] = activeItems[0].GetAbility();
 
-            Destroy(nearbyItems[0].gameObject);
+            GameObject destroyThis = nearbyItems[0].gameObject;
+            nearbyItems.Remove(nearbyItems[0]);
+            Destroy(destroyThis);
         }
     }
     void Move()
@@ -84,6 +86,11 @@ public class Player : Entity
     void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<Item>() != null) {
             nearbyItems.Add(other.GetComponent<Item>());
+        }
+    }
+    void OnTriggerExit2D(Collider2D other) {
+        if (other.GetComponent<Item>() != null) {
+            nearbyItems.Remove(other.GetComponent<Item>());
         }
     }
 }

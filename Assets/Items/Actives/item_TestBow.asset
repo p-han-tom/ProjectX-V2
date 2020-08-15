@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 279024f46516de04f909eda6c455f951, type: 3}
-  m_Name: Item_Test
+  m_Name: item_TestBow
   m_EditorClassIdentifier: 
-  name: Test
-  sprite: {fileID: 21300000, guid: 1705d37f49669a548940a7f2c3e02010, type: 3}
-  rarity: 4
-  ability: {fileID: 11400000, guid: 2bd2880f7d8c2b24a9304da3182e734f, type: 2}
+  name: TestBow
+  sprite: {fileID: -7856493677412862020, guid: e53964534e9579d4d9e30850b3f1ffe4, type: 3}
+  rarity: 2
+  ability: {fileID: 11400000, guid: 1e13770b75b5cec44b343d9cb9268727, type: 2}
