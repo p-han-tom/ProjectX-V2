@@ -11,6 +11,7 @@ public class ProjectileAbility : Ability
 
     public override void Cast(Vector2 direction, Vector3 mousePos, Transform source, int abilityLevel)
     {
+        base.Cast(direction, mousePos, source, abilityLevel);
         GameObject prefabInstance = Instantiate(prefab, source.position, Quaternion.identity);
         ProjectileBehaviour projectileBehaviour = prefabInstance.GetComponent<ProjectileBehaviour>();
         projectileBehaviour.sourceLayer = source.gameObject.layer;

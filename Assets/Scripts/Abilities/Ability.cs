@@ -10,9 +10,9 @@ public abstract class Ability : ScriptableObject
     public float cooldown;
     public float castTime;
     public float damage;
-    public enum AbilityType {IsCharged, IsCast, IsToggled}
-    public AbilityType abilityType;
 
+    public enum AbilityType {isCast, isCharged, IsToggled}
+    public AbilityType abilityType;
 
     public enum AccessoryLocation {None, Weapon, Body, Helmet}
     public AccessoryLocation accessoryLocation;
@@ -21,9 +21,11 @@ public abstract class Ability : ScriptableObject
 
     public GameObject prefab;
 
-    public abstract void Cast(Vector2 direction, Vector3 mousePos, Transform source, int abilityLevel);
+    public virtual void Cast(Vector2 direction, Vector3 mousePos, Transform source, int abilityLevel) {
+        EquipSprite(source);
+    }
 
-    public void EquipSprite(Transform source) {
+    protected void EquipSprite(Transform source) {
         if (accessoryLocation != AccessoryLocation.None) {
             if (accessoryLocation == AccessoryLocation.Weapon) {
                 source.Find("Pivot").Find("HeldWeapon").GetComponent<SpriteRenderer>().sprite = sprite;
@@ -31,4 +33,5 @@ public abstract class Ability : ScriptableObject
             // Implement others later
         }
     }
+
 }

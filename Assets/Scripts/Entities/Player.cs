@@ -9,8 +9,13 @@ public class Player : Entity
     Vector2 direction;
     List<Item> nearbyItems = new List<Item>();
     GameItem[] activeItems = new GameItem[4];
+    KeyCode[] keyBindings = {KeyCode.Mouse0, KeyCode.Mouse1, KeyCode.LeftShift, KeyCode.R};
     // Children
     Transform pivot;
+
+    // Abilities
+    bool abilityTriggered;
+    int triggeredAbility;
 
     protected override void CustomStart()
     {
@@ -22,6 +27,17 @@ public class Player : Entity
     {
         CheckInput();
         RotateWeapon();
+        if (abilityTriggered) {
+            if ((int)abilityList[triggeredAbility].abilityType == 0) {
+                StartCoroutine(Cast(abilityList[triggeredAbility].castTime, triggeredAbility));
+                abilityTriggered = false;
+            } else if ((int)abilityList[triggeredAbility].abilityType == 1) {
+                Charge(keyBindings[triggeredAbility], triggeredAbility);
+                Debug.Log("finished charge");
+            } else if ((int)abilityList[triggeredAbility].abilityType == 2) {
+
+            }
+        }
     }
 
     void FixedUpdate()
@@ -38,11 +54,13 @@ public class Player : Entity
 
         if (Input.GetMouseButtonDown(0))
         {
-            abilityList[0].Cast(direction, mousePos, transform, activeItems[0].GetAbilityLevel());
+            abilityTriggered = true;
+            triggeredAbility = 0;
         }
         if (Input.GetMouseButtonDown(1))
         {
-            abilityList[1].Cast(direction, mousePos, transform, activeItems[1].GetAbilityLevel());
+            abilityTriggered = true;
+            triggeredAbility = 1;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -100,14 +118,16 @@ public class Player : Entity
         }
     }
 
-    IEnumerator Cast(float castTime, GameItem item) {
+    IEnumerator Cast(float castTime, int index) {
         yield return new WaitForSeconds(castTime);
-        item.GetAbility().Cast(direction, mousePos, transform, item.GetAbilityLevel());
+        abilityList[index].Cast(direction, mousePos, transform, activeItems[index].GetAbilityLevel());
+        abilityTriggered = false;
     }
 
-    void Charge(KeyCode key, GameItem item) {
+    void Charge(KeyCode key, int index) {
         if (Input.GetKeyUp(key)) {
-            item.GetAbility().Cast(direction, mousePos, transform, item.GetAbilityLevel());
+            abilityList[index].Cast(direction, mousePos, transform, activeItems[index].GetAbilityLevel());
+            abilityTriggered = false;
         }
     }
 
