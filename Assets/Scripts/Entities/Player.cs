@@ -33,7 +33,6 @@ public class Player : Entity
                 abilityTriggered = false;
             } else if ((int)abilityList[triggeredAbility].abilityType == 1) {
                 Charge(keyBindings[triggeredAbility], triggeredAbility);
-                Debug.Log("finished charge");
             } else if ((int)abilityList[triggeredAbility].abilityType == 2) {
 
             }
