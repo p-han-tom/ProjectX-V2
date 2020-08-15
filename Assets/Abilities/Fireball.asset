@@ -17,6 +17,8 @@ MonoBehaviour:
   castTime: 0
   damage: 0
   abilityType: 1
+  accessoryLocation: 0
+  sprite: {fileID: 0}
   prefab: {fileID: 1699840863522557859, guid: fa9b3ecd371ac3040a616fa7e26aa4dc, type: 3}
   speed: 20
   onHitParticles: {fileID: 0}

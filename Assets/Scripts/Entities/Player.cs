@@ -54,8 +54,14 @@ public class Player : Entity
     {
         if (nearbyItems.Count > 0) {
             Item pickingUpItem = nearbyItems[0];
-            activeItems[0] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
-            abilityList[0] = activeItems[0].GetAbility();
+            for (int i = 0; i < 4; i ++) {
+                if (activeItems[i] == null) {
+                    activeItems[i] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
+                    abilityList[i] = activeItems[i].GetAbility();
+                    break;
+                }
+            }
+            
 
             GameObject destroyThis = nearbyItems[0].gameObject;
             nearbyItems.Remove(nearbyItems[0]);
@@ -92,5 +98,20 @@ public class Player : Entity
         if (other.GetComponent<Item>() != null) {
             nearbyItems.Remove(other.GetComponent<Item>());
         }
+    }
+
+    IEnumerator Cast(float castTime, GameItem item) {
+        yield return new WaitForSeconds(castTime);
+        item.GetAbility().Cast(direction, mousePos, transform, item.GetAbilityLevel());
+    }
+
+    void Charge(KeyCode key, GameItem item) {
+        if (Input.GetKeyUp(key)) {
+            item.GetAbility().Cast(direction, mousePos, transform, item.GetAbilityLevel());
+        }
+    }
+
+    void Channel(float castTime, GameItem item) {
+
     }
 }

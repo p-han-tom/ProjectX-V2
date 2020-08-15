@@ -18,7 +18,7 @@ public abstract class Entity : MonoBehaviour
 
     // Abilities
     [SerializeField]
-    protected Ability[] abilityList;
+    protected Ability[] abilityList = new Ability[4];
 
     protected virtual void CustomStart() {}
     protected virtual void CustomUpdate() {}
