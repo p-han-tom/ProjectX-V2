@@ -25,7 +25,7 @@ public abstract class Entity : MonoBehaviour
 
     void Start()
     {
-        animator = transform.Find("Sprite").GetComponent<Animator>();
+        animator = transform.Find("Sprites").Find("Sprite").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         CustomStart();
     }

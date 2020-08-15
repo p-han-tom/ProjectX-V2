@@ -5,17 +5,13 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public ItemData item;
-    public Ability ability;
+    public int itemLevel;
     SpriteRenderer spriteRenderer;
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.Find("Sprites").Find("Item Sprite").GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = item.sprite;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public ItemData GetItemData() {return item;}
+    public int GetItemLevel() {return itemLevel;}
 }

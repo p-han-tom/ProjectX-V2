@@ -7,7 +7,7 @@ public class MeleeAbility : Ability
 {
     [Header("Melee values")]
     public float distanceFromCaster;
-    public override void Cast(Vector2 direction, Vector3 mousePos, Transform source)
+    public override void Cast(Vector2 direction, Vector3 mousePos, Transform source, int abilityLevel)
     {
         GameObject prefabInstance = Instantiate(prefab, source.position, Quaternion.identity);
         MeleeBehaviour meleeBehaviour = prefabInstance.GetComponent<MeleeBehaviour>();

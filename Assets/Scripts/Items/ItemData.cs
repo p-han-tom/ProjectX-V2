@@ -7,10 +7,11 @@ public class ItemData : ScriptableObject
 {
     
     public new string name;
+    public Sprite sprite;
 
     [Range(1,5)]
     public int rarity;
-    public Sprite sprite;
+    public Ability ability;
 
 
 }

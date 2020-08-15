@@ -21,7 +21,7 @@ public abstract class Ability : ScriptableObject
 
     public GameObject prefab;
 
-    public abstract void Cast(Vector2 direction, Vector3 mousePos, Transform source);
+    public abstract void Cast(Vector2 direction, Vector3 mousePos, Transform source, int abilityLevel);
 
     public void EquipSprite(Transform source) {
         if (accessoryLocation != AccessoryLocation.None) {
