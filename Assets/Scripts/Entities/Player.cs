@@ -22,6 +22,7 @@ public class Player : Entity
     {
         CheckInput();
         RotateWeapon();
+
     }
 
     void FixedUpdate()
