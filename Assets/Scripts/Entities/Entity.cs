@@ -24,7 +24,7 @@ public abstract class Entity : MonoBehaviour
 
     void Start()
     {
-        activeItems = GetComponent<ActiveItems>();
+        activeItems = (gameObject.CompareTag("Player")) ? GetComponent<PlayerActiveItems>() : GetComponent<PlayerActiveItems>();
         animator = transform.Find("Sprites").Find("Sprite").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         CustomStart();

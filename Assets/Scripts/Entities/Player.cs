@@ -76,8 +76,11 @@ public class Player : Entity
 
     void RotateWeapon()
     {
+
         pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         pivot.up = direction;
+        
+
     }
 
     void OnTriggerEnter2D(Collider2D other) {

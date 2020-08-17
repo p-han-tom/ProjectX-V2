@@ -14,6 +14,8 @@ public class ProjectileAbility : Ability
         base.Cast(direction, mousePos, source, abilityLevel);
         GameObject prefabInstance = Instantiate(prefab, source.position, Quaternion.identity);
         ProjectileBehaviour projectileBehaviour = prefabInstance.GetComponent<ProjectileBehaviour>();
+
+        projectileBehaviour.RotateTowards(direction);
         projectileBehaviour.sourceLayer = source.gameObject.layer;
         projectileBehaviour.direction = direction;
         projectileBehaviour.speed = speed;

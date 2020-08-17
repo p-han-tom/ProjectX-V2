@@ -2,22 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveItems : MonoBehaviour
+public abstract class ActiveItems : MonoBehaviour
 {
 
     public GameItem[] items = new GameItem[4];
 
-    // Player
-    KeyCode[] playerKeybindings = {KeyCode.Mouse0, KeyCode.Mouse1, KeyCode.LeftShift, KeyCode.R};
-
     // Cast ability
-    bool triggered;
-    int abilityIndex;
-    float chargeTimer;
+    protected bool triggered;
+    protected int abilityIndex;
+    protected float chargeTimer;
 
-    // Mouse
-    Vector2 direction;
-    Vector3 mousePos;
 
     void Update()
     {
@@ -25,26 +19,7 @@ public class ActiveItems : MonoBehaviour
         CheckAbilityTrigger();
     }
 
-    void GetAbilityInput() {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
-
-        if (gameObject.CompareTag("Player")) {
-
-            for (int i = 0; i < 4; i ++) {
-                if (Input.GetKeyDown(playerKeybindings[i]) && items[i] != null) {
-                    triggered = true;
-                    abilityIndex = i;
-                    break;
-                }
-            }
-
-        } else if (gameObject.CompareTag("Enemy")) {
-
-            // If player in range select random ability to use
-
-        }
-    }
+    protected abstract void GetAbilityInput();
 
     void CheckAbilityTrigger() {
 
@@ -63,21 +38,7 @@ public class ActiveItems : MonoBehaviour
         }
     }
 
-    IEnumerator Cast(float castTime, int index) {
-        yield return new WaitForSeconds(castTime);
-        items[index].GetAbility().Cast(direction, mousePos, transform, items[index].GetAbilityLevel());
-    }
-
-
-    void Charge (float castTime, int index) {
-        if (gameObject.CompareTag("Player")) {
-            if (Input.GetKeyUp(playerKeybindings[index])) {
-                items[index].GetAbility().Cast(direction, mousePos, transform, items[index].GetAbilityLevel());
-                triggered = false;
-            }
-        } else if (gameObject.CompareTag("Enemy")) {
-            StartCoroutine(Cast(castTime, index));
-        }
-    }
+    protected abstract IEnumerator Cast(float castTime, int index);
+    protected abstract void Charge (float castTime, int index);
     
 }

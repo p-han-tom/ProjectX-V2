@@ -16,9 +16,12 @@ MonoBehaviour:
   cooldown: 0
   castTime: 0.25
   damage: 5
-  abilityType: 0
+  abilityType: 1
   accessoryLocation: 1
   sprite: {fileID: -7856493677412862020, guid: e53964534e9579d4d9e30850b3f1ffe4, type: 3}
-  prefab: {fileID: 1699840863522557859, guid: fa9b3ecd371ac3040a616fa7e26aa4dc, type: 3}
+  chargedSprite: {fileID: 9177565795109621906, guid: e53964534e9579d4d9e30850b3f1ffe4,
+    type: 3}
+  spriteRotation: -45
+  prefab: {fileID: 6159555893465035682, guid: fc326e81ba53d4e4aa99e969e337574a, type: 3}
   speed: 20
   onHitParticles: {fileID: 0}

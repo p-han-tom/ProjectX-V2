@@ -24,5 +24,13 @@ public class ProjectileBehaviour : MonoBehaviour
         rb.velocity = direction*speed;
     }
 
+    void OnCollisionEnter2D(Collision2D other) {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public void RotateTowards(Vector2 direction) {
+        transform.up = direction;
+    }
+
     
 }

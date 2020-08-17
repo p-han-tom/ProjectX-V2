@@ -18,6 +18,8 @@ public abstract class Ability : ScriptableObject
     public AccessoryLocation accessoryLocation;
 
     public Sprite sprite;
+    public Sprite chargedSprite;
+    public float spriteRotation;
 
     public GameObject prefab;
 
@@ -29,6 +31,7 @@ public abstract class Ability : ScriptableObject
         if (accessoryLocation != AccessoryLocation.None) {
             if (accessoryLocation == AccessoryLocation.Weapon) {
                 source.Find("Pivot").Find("HeldWeapon").GetComponent<SpriteRenderer>().sprite = sprite;
+                source.Find("Pivot").Find("HeldWeapon").transform.localRotation = Quaternion.Euler(0,0,spriteRotation);
             }
             // Implement others later
         }
