@@ -28,7 +28,7 @@ public class PlayerActiveItems : ActiveItems
     }
 
     protected override void Charge(float castTime, int index) {
-        transform.Find("Pivot").Find("HeldWeapon").GetComponent<SpriteRenderer>().sprite = items[index].GetAbility().chargedSprite;
+        transform.Find("Pivot").Find("Pivot").Find("HeldWeapon").GetComponent<SpriteRenderer>().sprite = items[index].GetAbility().chargedSprite;
         if (Input.GetKeyUp(playerKeybindings[index])) {
             items[index].GetAbility().Cast(direction, mousePos, transform, items[index].GetAbilityLevel());
             triggered = false;
