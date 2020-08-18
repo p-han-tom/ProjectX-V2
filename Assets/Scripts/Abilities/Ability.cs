@@ -9,6 +9,7 @@ public abstract class Ability : MonoBehaviour
     protected abstract float cooldown {get;}
     protected float currentCooldown;
 
+<<<<<<< HEAD
     // Components
     protected Animator animator;
     protected Rigidbody2D rb;
@@ -27,6 +28,7 @@ public abstract class Ability : MonoBehaviour
     public bool OnCooldown() {return (currentCooldown > 0) ? true : false;}
     public float GetRemainingCooldown() {return currentCooldown;}
     public float GetCooldown() {return cooldown;}
+
 
     
 }
