@@ -11,7 +11,7 @@ public class ItemData : ScriptableObject
 
     [Range(1,5)]
     public int rarity;
-    public Ability ability;
+    public GameObject active;
 
 
 }

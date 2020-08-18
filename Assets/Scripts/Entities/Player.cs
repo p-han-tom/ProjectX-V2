@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player : Entity
 {
     // Mouse
-    Vector3 mousePos;
-    Vector2 direction;
+    public Vector3 mousePos;
+    public Vector2 direction;
     List<Item> nearbyItems = new List<Item>();
+
+    GameItem weapon;
 
     // Children
     Transform pivot;
@@ -41,17 +43,22 @@ public class Player : Entity
         {
             PickupItem();
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            weapon.Cast(direction, mousePos, transform);
+        }
     }
     void PickupItem()
     {
         if (nearbyItems.Count > 0) {
             Item pickingUpItem = nearbyItems[0];
-            for (int i = 0; i < 4; i ++) {
-                if (activeItems.items[i] == null) {
-                    activeItems.items[i] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
-                    break;
-                }
-            }
+            // for (int i = 0; i < 4; i ++) {
+            //     if (activeItems.items[i] == null) {
+            //         activeItems.items[i] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
+            //         break;
+            //     }
+            // }
+            weapon = new GameItem(pickingUpItem.item, pickingUpItem.GetItemLevel());
             
 
             GameObject destroyThis = nearbyItems[0].gameObject;

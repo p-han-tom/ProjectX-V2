@@ -17,14 +17,12 @@ public abstract class Entity : MonoBehaviour
     protected float currentHP;
 
     // Abilities
-    protected ActiveItems activeItems;
 
     protected virtual void CustomStart() {}
     protected virtual void CustomUpdate() {}
 
     void Start()
     {
-        activeItems = (gameObject.CompareTag("Player")) ? GetComponent<PlayerActiveItems>() : GetComponent<PlayerActiveItems>();
         animator = transform.Find("Sprites").Find("Sprite").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         CustomStart();
