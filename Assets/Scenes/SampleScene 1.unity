@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 6661634944709995200, guid: 3620b6e98f191d943b65abd28cdad3e7,
         type: 3}
       propertyPath: m_Name
-      value: Generic Item (1)
+      value: Test Bow
       objectReference: {fileID: 0}
     - target: {fileID: 6661634944709995200, guid: 3620b6e98f191d943b65abd28cdad3e7,
         type: 3}
@@ -2227,8 +2227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ef6cd1a02a7e945891f11f0029a756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePos: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0}
+  castDirection: {x: 0, y: 0}
+  castPosition: {x: 0, y: 0}
 --- !u!212 &3643670513538675276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2382,7 +2382,7 @@ PrefabInstance:
     - target: {fileID: 6661634944709995200, guid: 3620b6e98f191d943b65abd28cdad3e7,
         type: 3}
       propertyPath: m_Name
-      value: Generic Item
+      value: Test Sword
       objectReference: {fileID: 0}
     - target: {fileID: 6661634944709995200, guid: 3620b6e98f191d943b65abd28cdad3e7,
         type: 3}

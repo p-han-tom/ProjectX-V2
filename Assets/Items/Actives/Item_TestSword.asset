@@ -15,4 +15,4 @@ MonoBehaviour:
   name: TestSword
   sprite: {fileID: 21300000, guid: 1705d37f49669a548940a7f2c3e02010, type: 3}
   rarity: 4
-  ability: {fileID: 11400000, guid: 2bd2880f7d8c2b24a9304da3182e734f, type: 2}
+  active: {fileID: 3971618844134991258, guid: 78a4b23ebbb322845af725cd52780547, type: 3}

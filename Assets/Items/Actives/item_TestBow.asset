@@ -15,4 +15,4 @@ MonoBehaviour:
   name: TestBow
   sprite: {fileID: -7856493677412862020, guid: e53964534e9579d4d9e30850b3f1ffe4, type: 3}
   rarity: 2
-  ability: {fileID: 11400000, guid: 1e13770b75b5cec44b343d9cb9268727, type: 2}
+  active: {fileID: 1946642229903506906, guid: 6d57b0fbd0924754e855f9061bf24af0, type: 3}
