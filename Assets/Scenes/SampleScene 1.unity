@@ -121,18 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &55096162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3643670513485306376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07a1e21b918eae84bbca37d035e91367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &567662499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1176,7 +1164,7 @@ GameObject:
   - component: {fileID: 1068433375}
   - component: {fileID: 1068433376}
   m_Layer: 0
-  m_Name: Pivot
+  m_Name: Weapon Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2157,7 +2145,6 @@ GameObject:
   - component: {fileID: 3643670513485306383}
   - component: {fileID: 3643670513485306381}
   - component: {fileID: 3643670513485306382}
-  - component: {fileID: 55096162}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2240,6 +2227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ef6cd1a02a7e945891f11f0029a756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0}
 --- !u!212 &3643670513538675276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2315,7 +2304,7 @@ GameObject:
   - component: {fileID: 3643670513538675277}
   - component: {fileID: 3643670513538675276}
   m_Layer: 0
-  m_Name: HeldWeapon
+  m_Name: Held Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

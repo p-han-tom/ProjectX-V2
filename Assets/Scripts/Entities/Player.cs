@@ -9,7 +9,7 @@ public class Player : Entity
     public Vector2 direction;
     List<Item> nearbyItems = new List<Item>();
 
-    GameItem weapon;
+    GameObject weapon;
 
     // Children
     Transform pivot;
@@ -44,8 +44,8 @@ public class Player : Entity
             PickupItem();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            weapon.Cast(direction, mousePos, transform);
+        if (Input.GetKey(KeyCode.Mouse0)) {
+            weapon.GetComponent<Weapon>().Cast(direction, mousePos, transform, 1);
         }
     }
     void PickupItem()
@@ -58,7 +58,7 @@ public class Player : Entity
             //         break;
             //     }
             // }
-            weapon = new GameItem(pickingUpItem.item, pickingUpItem.GetItemLevel());
+            weapon = Instantiate(pickingUpItem.item.active);
             
 
             GameObject destroyThis = nearbyItems[0].gameObject;

@@ -9,7 +9,6 @@ public abstract class Ability : MonoBehaviour
     protected abstract float cooldown {get;}
     protected float currentCooldown;
 
-<<<<<<< HEAD
     // Components
     protected Animator animator;
     protected Rigidbody2D rb;
