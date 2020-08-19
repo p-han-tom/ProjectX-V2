@@ -29,25 +29,54 @@ public abstract class Weapon : MonoBehaviour
     protected float maxChargeDuration;
     protected float chargeStrength = 1;
     protected bool isCharging;
+    protected int chargeIntervals;
 
 
     protected virtual void Start(){
-        Debug.Log("hello?");
         rb = GetComponent<Rigidbody2D>();
+        chargeIntervals = chargeSprites.Length;
+
     }
 
 
     /* Casting methods */
     public virtual void Cast(Vector2 direction, Vector3 castPosition, Transform source, int abilityLevel) {
-        EquipSprite(source);
+        if (!isCharging) EquipSprite(source, sprite);
         triggered = true;
         this.source = source;
+    }
+
+    protected virtual void InstantiatePrefab() {}
+
+    /* Charging methods */
+    protected virtual void UpdateChargedSprite() {
+        for (int i = 0; i < chargeIntervals; i ++) {
+            if (chargeTimer < (maxChargeDuration/chargeIntervals)*i) {
+                EquipSprite(source, chargeSprites[i]);
+                break;
+            } 
+        }
+        
+    }
+
+    protected virtual void Charge() {
+        if (triggered) {
+            chargeTimer += Time.deltaTime;
+            UpdateChargedSprite();
+        } else if (!triggered && isCharging) {
+            InstantiatePrefab();
+            isCharging = false;
+            chargeTimer = 0;
+            EquipSprite(source, sprite);
+        }
+
+        triggered = false;
     }
 
     /* *************** */
 
 
-    protected virtual void EquipSprite(Transform source) {
+    protected virtual void EquipSprite(Transform source, Sprite sprite) {
         source.Find("Pivot").Find("Weapon Pivot").Find("Held Weapon").GetComponent<SpriteRenderer>().sprite = sprite;
         source.Find("Pivot").Find("Weapon Pivot").Find("Held Weapon").transform.localEulerAngles = new Vector3(0,0,spriteRotation);
     }

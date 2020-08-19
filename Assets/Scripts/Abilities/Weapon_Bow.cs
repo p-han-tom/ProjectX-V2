@@ -13,6 +13,7 @@ public class Weapon_Bow : Weapon
 
     protected override void Start() {
         base.Start();
+        maxChargeDuration = .75f;
     }
 
     public override void Cast(Vector2 direction, Vector3 castPosition, Transform source, int abilityLevel) {
@@ -20,20 +21,17 @@ public class Weapon_Bow : Weapon
         isCharging = true;
     }
 
+    protected override void InstantiatePrefab() {
+        arrow = Instantiate(arrowPrefab, source.position, Quaternion.identity);
+        arrow.GetComponent<ArrowProjectile>().direction = source.GetComponent<Player>().direction;
+        arrow.GetComponent<ArrowProjectile>().transform.up = source.GetComponent<Player>().direction;
+        arrow.GetComponent<ArrowProjectile>().sourceLayer = source.gameObject.layer;
+        arrow.GetComponent<ArrowProjectile>().speed = 20;
+    }
+
     void Update() {
         
-        if (triggered) {
-            chargeTimer += Time.deltaTime;
-        } else if (!triggered && isCharging) {
-            arrow = Instantiate(arrowPrefab, source.position, Quaternion.identity);
-            arrow.GetComponent<ArrowProjectile>().direction = source.GetComponent<Player>().direction;
-            arrow.GetComponent<ArrowProjectile>().transform.up = source.GetComponent<Player>().direction;
-            arrow.GetComponent<ArrowProjectile>().sourceLayer = source.gameObject.layer;
-            arrow.GetComponent<ArrowProjectile>().speed = 20;
-            isCharging = false;
-        }
-
-        triggered = false;
+        Charge();
         
     }
 }
