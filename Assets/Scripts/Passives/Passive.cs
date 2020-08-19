@@ -10,7 +10,7 @@ public abstract class Passive : MonoBehaviour
     protected abstract float tickSpeed();
     protected float tickTimeElapsed = 0f;
     ///<summary> If this is a status effect, duration determines how long it will last in seconds. 
-    /// If this is passive, then duration has no effect (Infinite duration).</summary>
+    /// If this is a trinket, then duration has no effect (Infinite duration).</summary>
     protected float duration = 5f;
     [HideInInspector] public Entity owner;
     protected abstract void TickEffect();
