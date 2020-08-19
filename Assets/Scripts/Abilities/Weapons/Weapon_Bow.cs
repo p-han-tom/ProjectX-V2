@@ -16,21 +16,21 @@ public class Weapon_Bow : Weapon
         maxChargeDuration = .75f;
     }
 
-    public override void Cast(Vector2 direction, Vector3 castPosition, Transform source, int abilityLevel) {
-        base.Cast(direction, castPosition, source, abilityLevel);
+    public override void Cast(Transform source, int abilityLevel) {
+        base.Cast(source, abilityLevel);
         isCharging = true;
     }
 
     protected override void InstantiatePrefab() {
-        arrow = Instantiate(arrowPrefab, source.position, Quaternion.identity);
-        arrow.GetComponent<ArrowProjectile>().direction = source.GetComponent<Player>().direction;
-        arrow.GetComponent<ArrowProjectile>().transform.up = source.GetComponent<Player>().direction;
+        arrow = Instantiate(arrowPrefab, source.transform.position, Quaternion.identity);
+        arrow.GetComponent<ArrowProjectile>().direction = source.castDirection;
+        arrow.GetComponent<ArrowProjectile>().transform.up = source.castDirection;
         arrow.GetComponent<ArrowProjectile>().sourceLayer = source.gameObject.layer;
         arrow.GetComponent<ArrowProjectile>().speed = 20;
     }
 
-    void Update() {
-        
+    protected override void Update() {
+        base.Update();
         Charge();
         
     }

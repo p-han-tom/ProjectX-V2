@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5142075049971946340}
   - component: {fileID: 5142075049971946341}
   - component: {fileID: 5142075049971946342}
-  - component: {fileID: 5142075049971946343}
   - component: {fileID: 5142075049971946344}
   m_Layer: 0
   m_Name: Crescent
@@ -104,18 +103,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5142075049971946343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5142075049971946345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3d63ca6105c89498f5efc893e3bde1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &5142075049971946344
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

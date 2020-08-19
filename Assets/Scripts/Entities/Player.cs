@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    // Mouse
-    public Vector3 mousePos;
-    public Vector2 direction;
-    List<Item> nearbyItems = new List<Item>();
 
-    GameObject weapon;
+    List<Item> nearbyItems = new List<Item>();
+    GameObject[] weapons = new GameObject[4];
 
     // Children
     Transform pivot;
 
-    protected override void CustomStart()
+    protected override void Start()
     {
+        base.Start();
         movementSpeed = new Stat(5f);
         pivot = transform.Find("Pivot");
     }
 
-    protected override void CustomUpdate()
+    protected override void Update()
     {
+        base.Update();
         CheckInput();
         RotateWeapon();
-
     }
 
     void FixedUpdate()
@@ -36,30 +34,31 @@ public class Player : Entity
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y).normalized;
+        castPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        castDirection = new Vector2(castPosition.x - transform.position.x, castPosition.y - transform.position.y).normalized;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+        if (Input.GetKeyDown(KeyCode.E)) {
             PickupItem();
         }
 
         if (Input.GetKey(KeyCode.Mouse0)) {
-            weapon.GetComponent<Weapon>().Cast(direction, mousePos, transform, 1);
+            weapons[0].GetComponent<Weapon>().Cast(transform, 1);
+        }
+
+        if (Input.GetKey(KeyCode.Mouse1)) {
+            weapons[1].GetComponent<Weapon>().Cast(transform, 1);
         }
     }
     void PickupItem()
     {
         if (nearbyItems.Count > 0) {
             Item pickingUpItem = nearbyItems[0];
-            // for (int i = 0; i < 4; i ++) {
-            //     if (activeItems.items[i] == null) {
-            //         activeItems.items[i] = new GameItem(pickingUpItem.GetItemData(), pickingUpItem.GetItemLevel());
-            //         break;
-            //     }
-            // }
-            weapon = Instantiate(pickingUpItem.item.active);
-            
+            for (int i = 0; i < weapons.Length; i ++) {
+                if (weapons[i] == null) {
+                    weapons[i] = Instantiate(pickingUpItem.item.active);
+                    break;
+                }
+            }            
 
             GameObject destroyThis = nearbyItems[0].gameObject;
             nearbyItems.Remove(nearbyItems[0]);
@@ -84,8 +83,8 @@ public class Player : Entity
     void RotateWeapon()
     {
 
-        pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
-        pivot.up = direction;
+        pivot.localScale = (castPosition.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+        pivot.up = castDirection;
         
 
     }

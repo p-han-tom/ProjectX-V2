@@ -7,7 +7,7 @@ public abstract class Weapon : MonoBehaviour
     // General
     protected abstract new string name {get;}
     protected bool triggered;
-    protected Transform source;
+    protected Entity source;
 
     // CD
     protected abstract float cooldown {get;}
@@ -31,19 +31,24 @@ public abstract class Weapon : MonoBehaviour
     protected bool isCharging;
     protected int chargeIntervals;
 
-
     protected virtual void Start(){
         rb = GetComponent<Rigidbody2D>();
         chargeIntervals = chargeSprites.Length;
-
     }
 
+    protected virtual void Update() {
+        if (OnCooldown()) {
+            DecreaseCooldown();
+        }
+    }
 
     /* Casting methods */
-    public virtual void Cast(Vector2 direction, Vector3 castPosition, Transform source, int abilityLevel) {
+    public virtual void Cast(Transform source, int abilityLevel) {
+
         if (!isCharging) EquipSprite(source, sprite);
         triggered = true;
-        this.source = source;
+        this.source = source.GetComponent<Entity>();
+      
     }
 
     protected virtual void InstantiatePrefab() {}
@@ -52,11 +57,10 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void UpdateChargedSprite() {
         for (int i = 0; i < chargeIntervals; i ++) {
             if (chargeTimer < (maxChargeDuration/chargeIntervals)*i) {
-                EquipSprite(source, chargeSprites[i]);
+                EquipSprite(source.transform, chargeSprites[i]);
                 break;
             } 
         }
-        
     }
 
     protected virtual void Charge() {
@@ -67,7 +71,8 @@ public abstract class Weapon : MonoBehaviour
             InstantiatePrefab();
             isCharging = false;
             chargeTimer = 0;
-            EquipSprite(source, sprite);
+            EquipSprite(source.transform, sprite);
+            StartCooldown();
         }
 
         triggered = false;

@@ -17,19 +17,17 @@ public abstract class Entity : MonoBehaviour
     protected float currentHP;
 
     // Abilities
+    public Vector2 castDirection;
+    public Vector2 castPosition;
 
-    protected virtual void CustomStart() {}
-    protected virtual void CustomUpdate() {}
-
-    void Start()
+    protected virtual void Start()
     {
         animator = transform.Find("Sprites").Find("Sprite").GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        CustomStart();
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        CustomUpdate();
+
     }
 }
