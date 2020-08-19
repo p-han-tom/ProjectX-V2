@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 6661634944709995200, guid: 3620b6e98f191d943b65abd28cdad3e7,
         type: 3}
       propertyPath: m_Name
-      value: Generic Item
+      value: test passive item
       objectReference: {fileID: 0}
     - target: {fileID: 6661634944709995202, guid: 3620b6e98f191d943b65abd28cdad3e7,
         type: 3}
