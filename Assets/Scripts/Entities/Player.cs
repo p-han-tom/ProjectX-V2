@@ -6,7 +6,6 @@ public class Player : Entity
 {
 
     List<Item> nearbyItems = new List<Item>();
-    GameObject[] weapons = new GameObject[4];
 
     // Children
     Transform pivot;
@@ -56,6 +55,7 @@ public class Player : Entity
             for (int i = 0; i < weapons.Length; i ++) {
                 if (weapons[i] == null) {
                     weapons[i] = Instantiate(pickingUpItem.item.active);
+                    weapons[i].transform.parent = transform;
                     break;
                 }
             }            
