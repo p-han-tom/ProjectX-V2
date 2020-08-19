@@ -17,9 +17,10 @@ public abstract class Entity : MonoBehaviour
     protected float currentHP;
 
     // Abilities
-    protected GameObject[] weapons = new GameObject[4];
+    protected GameObject[] weapons;
     public Vector2 castDirection;
     public Vector2 castPosition;
+    protected GameObject[] trinkets;
 
     protected virtual void Start()
     {
