@@ -9,10 +9,12 @@ public class Weapon_Sword : Weapon
     GameObject crescent;
     
     protected override string name {get {return "Sword";}}
-    protected override float cooldown {get {return .25f;}}
+    protected override float cooldown {get {return .35f;}}
 
     protected override void InstantiatePrefab() {
         crescent = Instantiate(crescentPrefab, source.transform.position, Quaternion.identity);
+        crescent.GetComponent<AbilityPrefab>().source = source;
+        crescent.GetComponent<AbilityPrefab>().knockbackPower = 10f;
         crescent.transform.up = source.GetComponent<Entity>().castDirection;
         crescent.transform.position += new Vector3(source.castDirection.x, source.castDirection.y, 0);
     }

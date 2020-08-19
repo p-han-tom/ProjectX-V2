@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowProjectile : MonoBehaviour
+public class ArrowProjectile : AbilityPrefab
 {
     [HideInInspector] public float speed;
     [HideInInspector] public Vector2 direction;
-    [HideInInspector] public LayerMask sourceLayer;
-
+    bool hit;
     private Rigidbody2D rb;
 
-    void Start()
-    {
-        Physics2D.IgnoreLayerCollision(sourceLayer.value, gameObject.layer);
-        rb = GetComponent<Rigidbody2D>();   
+    protected override void Start() {
+        base.Start();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -22,8 +20,18 @@ public class ArrowProjectile : MonoBehaviour
         rb.velocity = direction*speed;
     }
 
+    protected override void OnHit(Transform other) {
+        if (other.GetComponent<Entity>() != null) {
+            other.GetComponent<Entity>().TakeDamage(damage);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D other) {
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        
+        transform.parent = other.transform;
+        
+        OnHit(other.collider.transform);
+        Destroy(gameObject);
     }
     
 }

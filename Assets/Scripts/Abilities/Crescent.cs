@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crescent : MonoBehaviour
+public class Crescent : AbilityPrefab
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    protected override void OnHit(Transform other) {
+
+        if (other.GetComponent<Entity>() != null) {
+            other.GetComponent<Entity>().TakeDamage(damage);
+            StartCoroutine(Knockback(other.GetComponent<Rigidbody2D>()));
+        }        
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        OnHit(other.transform);
     }
 }

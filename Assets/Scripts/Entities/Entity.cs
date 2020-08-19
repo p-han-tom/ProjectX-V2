@@ -12,6 +12,9 @@ public abstract class Entity : MonoBehaviour
     protected Vector2 movement;
     protected Stat movementSpeed;
 
+    // States
+    public bool underAttack;
+
     // Stats
     protected Stat maxHP;
     protected float currentHP;
@@ -31,5 +34,13 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Update()
     {
 
+    }
+
+    public void TakeDamage(float damage) {
+        currentHP -= damage;
+    }
+
+    public void Knockback(Vector2 forceVector) {
+        rb.AddForce(forceVector, ForceMode2D.Impulse);
     }
 }
