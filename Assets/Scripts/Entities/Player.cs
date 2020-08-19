@@ -9,6 +9,7 @@ public class Player : Entity
 
     // Children
     Transform pivot;
+    InventoryHandler inventory;
 
     protected override void Start()
     {
@@ -17,6 +18,7 @@ public class Player : Entity
         pivot = transform.Find("Pivot");
         weapons = new GameObject[4];
         trinkets = new GameObject[4];
+        inventory = GameObject.Find("UI").transform.Find("Inventory").GetComponent<InventoryHandler>();
     }
 
     protected override void Update()
@@ -68,6 +70,7 @@ public class Player : Entity
                 {
                     if (weapons[i] == null)
                     {
+                        inventory.SetItemAbility(pickingUpItem, i);
                         weapons[i] = effect;
                         weapons[i].transform.parent = transform;
                         break;
@@ -80,6 +83,7 @@ public class Player : Entity
                 {
                     if (trinkets[i] == null)
                     {
+                        inventory.SetItemTrinket(pickingUpItem, i);
                         trinkets[i] = effect;
                         trinkets[i].transform.parent = transform;
                         effect.GetComponent<Passive>().owner = this;

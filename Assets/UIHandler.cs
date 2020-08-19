@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class UIHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GameObject inventory;
     void Start()
     {
-        
+        inventory = transform.Find("Inventory").gameObject;
+        CloseInventory();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        CheckInput();
     }
+    void CheckInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (inventory.activeSelf == false)
+            {
+                OpenInventory();
+            }
+            else
+            {
+                CloseInventory();
+            }
+        }
+    }
+    void OpenInventory() { inventory.SetActive(true); }
+    void CloseInventory() { inventory.SetActive(false); }
 }

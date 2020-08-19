@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: item_TestBow
   m_EditorClassIdentifier: 
   name: TestBow
-  sprite: {fileID: -7856493677412862020, guid: e53964534e9579d4d9e30850b3f1ffe4, type: 3}
+  sprite: {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   rarity: 2
   active: {fileID: 1946642229903506906, guid: 6d57b0fbd0924754e855f9061bf24af0, type: 3}
