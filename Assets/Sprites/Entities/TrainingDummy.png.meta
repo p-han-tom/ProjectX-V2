@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -991832195880308542
     second: TrainingDummy_1
+  - first:
+      213: -1093676399328398863
+    second: TrainingDummy_0
+  - first:
+      213: -2670728478962773727
+    second: TrainingDummy_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -108,10 +114,10 @@ TextureImporter:
       name: TrainingDummy_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 12
-        height: 15
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42c5c6ef3c1d99b30800000000000000
-      internalID: 4294694359391820836
+      spriteID: 1f17dcefb1b72d0f0800000000000000
+      internalID: -1093676399328398863
       vertices: []
       indices: 
       edges: []
@@ -129,10 +135,10 @@ TextureImporter:
       name: TrainingDummy_1
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 0
-        width: 12
-        height: 14
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +146,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c032cf6fdd4c32f0800000000000000
-      internalID: -991832195880308542
+      spriteID: 12197e7399aafead0800000000000000
+      internalID: -2670728478962773727
       vertices: []
       indices: 
       edges: []

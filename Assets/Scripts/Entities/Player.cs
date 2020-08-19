@@ -29,7 +29,8 @@ public class Player : Entity
 
     void FixedUpdate()
     {
-        Move();
+        if (underAttack) return;
+        else Move();
     }
 
     void CheckInput()
@@ -47,6 +48,7 @@ public class Player : Entity
         if (Input.GetKey(KeyCode.Mouse0))
         {
             weapons[0].GetComponent<Weapon>().Cast(transform, 1);
+            
         }
 
         if (Input.GetKey(KeyCode.Mouse1))

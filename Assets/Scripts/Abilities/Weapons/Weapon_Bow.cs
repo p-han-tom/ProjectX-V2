@@ -23,9 +23,10 @@ public class Weapon_Bow : Weapon
 
     protected override void InstantiatePrefab() {
         arrow = Instantiate(arrowPrefab, source.transform.position, Quaternion.identity);
+        arrow.transform.up = source.castDirection;
+
+        arrow.GetComponent<AbilityPrefab>().source = source;
         arrow.GetComponent<ArrowProjectile>().direction = source.castDirection;
-        arrow.GetComponent<ArrowProjectile>().transform.up = source.castDirection;
-        arrow.GetComponent<ArrowProjectile>().sourceLayer = source.gameObject.layer;
         arrow.GetComponent<ArrowProjectile>().speed = 20;
     }
 
