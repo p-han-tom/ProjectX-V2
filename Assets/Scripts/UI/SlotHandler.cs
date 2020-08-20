@@ -27,7 +27,8 @@ public abstract class SlotHandler : MonoBehaviour
     public virtual void SetItemData(ItemData itemData)
     {
         this.itemData = itemData;
-        SetItemSprite(itemData.sprite);
+        if (itemData != null)
+            SetItemSprite(itemData.sprite);
     }
     public virtual void SetItemObject(GameObject itemObject) {
         this.itemObject = itemObject;

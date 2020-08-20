@@ -101,6 +101,7 @@ public abstract class Active : MonoBehaviour
     public bool OnCooldown() {return (currentCooldown > 0) ? true : false;}
     public float GetRemainingCooldown() {return currentCooldown;}
     public float GetCooldown() {return cooldown;}
+    public float GetCurrentCooldown() {return currentCooldown;}
     
 }
 
