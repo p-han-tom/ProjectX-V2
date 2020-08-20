@@ -70,7 +70,7 @@ public class Player : Entity
                 {
                     if (weapons[i] == null)
                     {
-                        inventory.SetItemAbility(pickingUpItem, i);
+                        inventory.SetItemAbility(pickingUpItem.GetItemData(), i);
                         weapons[i] = effect;
                         weapons[i].transform.parent = transform;
                         break;
@@ -83,7 +83,7 @@ public class Player : Entity
                 {
                     if (trinkets[i] == null)
                     {
-                        inventory.SetItemTrinket(pickingUpItem, i);
+                        inventory.SetItemTrinket(pickingUpItem.GetItemData(), i);
                         trinkets[i] = effect;
                         trinkets[i].transform.parent = transform;
                         effect.GetComponent<Passive>().owner = this;
