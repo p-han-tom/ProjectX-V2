@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class InventoryHandler : MonoBehaviour
 {
-    InventorySlotHandler[] abilitySlots; 
-    InventorySlotHandler[] trinketSlots;
-    InventorySlotHandler [] storageSlots;
+    [HideInInspector] public InventorySlotHandler[] abilitySlots; 
+    [HideInInspector] public InventorySlotHandler[] trinketSlots;
+    [HideInInspector] public InventorySlotHandler [] storageSlots;
     Player player;
     void Start()
     {
@@ -15,10 +15,15 @@ public class InventoryHandler : MonoBehaviour
         trinketSlots = transform.Find("Trinkets").Find("Slots").GetComponentsInChildren<InventorySlotHandler>();
         trinketSlots = transform.Find("Storage").Find("Slots").GetComponentsInChildren<InventorySlotHandler>();
     }
-    public void SetItemAbility(ItemData itemData, int slot) {
+    public void SetItemAbility(ItemData itemData, GameObject itemObject, int slot) {
         abilitySlots[slot].SetItemData(itemData);
+        abilitySlots[slot].SetItemObject(itemObject);
     }
-    public void SetItemTrinket(ItemData itemData, int slot) {
+    public void SetItemTrinket(ItemData itemData, GameObject itemObject, int slot) {
         trinketSlots[slot].SetItemData(itemData);
+        trinketSlots[slot].SetItemObject(itemObject);
+    }
+    public void UpdatePlayerInventory() {
+        player.UpdateInventory();
     }
 }
