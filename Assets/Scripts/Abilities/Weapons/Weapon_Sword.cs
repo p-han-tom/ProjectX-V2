@@ -24,9 +24,9 @@ public class Weapon_Sword : Weapon
         if (OnCooldown()) return;
 
         source.Find("Pivot").Find("Weapon Pivot").GetComponent<Animator>().SetTrigger("Swing");
-        InstantiatePrefab();
+        InstantiatePrefab(); 
         StartCooldown();
-        
+       
     }
 
     protected override void Update() {

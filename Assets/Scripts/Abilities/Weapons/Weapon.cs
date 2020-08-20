@@ -14,7 +14,9 @@ public abstract class Weapon : MonoBehaviour
     protected float currentCooldown;
 
     // Sprite stuff
+    public enum SpriteLocation {Weapon, Head, Body};
     [Header("Sprite values")]
+    public SpriteLocation spriteLocation;
     public float spriteRotation;
     public Sprite sprite;
     public Sprite[] chargeSprites;
@@ -48,6 +50,8 @@ public abstract class Weapon : MonoBehaviour
         if (!isCharging) EquipSprite(source, sprite);
         triggered = true;
         this.source = source.GetComponent<Entity>();
+        this.source.transform.localRotation = (this.source.castDirection.x <= 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+
       
     }
 
@@ -82,8 +86,11 @@ public abstract class Weapon : MonoBehaviour
 
 
     protected virtual void EquipSprite(Transform source, Sprite sprite) {
-        source.Find("Pivot").Find("Weapon Pivot").Find("Held Weapon").GetComponent<SpriteRenderer>().sprite = sprite;
-        source.Find("Pivot").Find("Weapon Pivot").Find("Held Weapon").transform.localEulerAngles = new Vector3(0,0,spriteRotation);
+        if (spriteLocation == SpriteLocation.Weapon) {
+            source.Find("Pivot").Find("Weapon Pivot").Find("Held Weapon").GetComponent<SpriteRenderer>().sprite = sprite;
+            source.Find("Pivot").Find("Weapon Pivot").Find("Held Weapon").transform.localEulerAngles = new Vector3(0,0,spriteRotation);
+        }
+        
     }
     public virtual void StartCooldown() {currentCooldown = cooldown;}
     public virtual void DecreaseCooldown() {currentCooldown -= Time.deltaTime;}
