@@ -24,5 +24,14 @@ public class MouseSlotHandler : SlotHandler
             transform.position = Vector3.MoveTowards(transform.position, mousePos, 5f);
         }
     }
-
+    private void OnDisable() {
+        ReturnItemToHome();
+    }
+    public void ReturnItemToHome() {
+        if (itemData != null && itemObject != null) {
+            homeSlot.SetItemData(itemData);
+            homeSlot.SetItemObject(itemObject);
+            RemoveItem();
+        }
+    }
 }
