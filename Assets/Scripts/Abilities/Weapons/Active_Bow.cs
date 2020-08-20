@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_Bow : Weapon
+public class Active_Bow : Active
 {
     [Header("Arrow prefab")]
     public GameObject arrowPrefab;

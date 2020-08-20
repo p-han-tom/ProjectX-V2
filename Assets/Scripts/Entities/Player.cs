@@ -49,13 +49,23 @@ public class Player : Entity
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            weapons[0].GetComponent<Weapon>().Cast(transform, 1);
+            weapons[0].GetComponent<Active>().Cast(transform, 1);
             
         }
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            weapons[1].GetComponent<Weapon>().Cast(transform, 1);
+            weapons[1].GetComponent<Active>().Cast(transform, 1);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            weapons[2].GetComponent<Active>().Cast(transform, 1);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            weapons[3].GetComponent<Active>().Cast(transform, 1);
         }
     }
     void PickupItem()
@@ -64,7 +74,7 @@ public class Player : Entity
         {
             Item pickingUpItem = nearbyItems[0];
             GameObject effect = Instantiate(pickingUpItem.item.active);
-            if (effect.GetComponent<Weapon>() != null)
+            if (effect.GetComponent<Active>() != null)
             {
                 for (int i = 0; i < weapons.Length; i++)
                 {

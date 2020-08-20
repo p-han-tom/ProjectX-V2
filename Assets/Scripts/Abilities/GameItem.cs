@@ -10,8 +10,8 @@ public class GameItem
         this.item = item;
         this.abilityLevel = abilityLevel;
     }
-    public void Cast(Transform source) {item.active.GetComponent<Weapon>().Cast(source, abilityLevel);}
+    public void Cast(Transform source) {item.active.GetComponent<Active>().Cast(source, abilityLevel);}
     public ItemData GetItemData() {return item;}
-    public Weapon GetActive() {return item.active.GetComponent<Weapon>();}
+    public Active GetActive() {return item.active.GetComponent<Active>();}
     public int GetAbilityLevel() {return abilityLevel;}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_Sword : Weapon
+public class Active_Sword : Active
 {
     [Header("Crescent Prefab")]
     public GameObject crescentPrefab;

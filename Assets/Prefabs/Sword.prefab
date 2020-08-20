@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c687951f927314181295369806f9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteLocation: 0
   spriteRotation: -90
+  spriteDistance: 0.75
   sprite: {fileID: 21300000, guid: ebacdd7c8d6b6f1419db640c5c5b749d, type: 3}
   chargeSprites: []
   chargeKey: 0

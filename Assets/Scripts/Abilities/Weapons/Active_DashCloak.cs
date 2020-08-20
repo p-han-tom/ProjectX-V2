@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Active_DashCloak : Weapon
+public class Active_DashCloak : Active
 {
     [Header("Dash Trail Prefab")]
     public GameObject ghostTrail;

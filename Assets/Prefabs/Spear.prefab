@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1946642229903506906
+--- !u!1 &6230143740205316414
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6317591370896648823}
-  - component: {fileID: 4028443776839147868}
+  - component: {fileID: 5965946226637171117}
+  - component: {fileID: 762081747905964906}
   m_Layer: 0
-  m_Name: Bow
+  m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6317591370896648823
+--- !u!4 &5965946226637171117
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946642229903506906}
+  m_GameObject: {fileID: 6230143740205316414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.9374529, y: -1.0653259, z: -1.2986329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4028443776839147868
+--- !u!114 &762081747905964906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1946642229903506906}
+  m_GameObject: {fileID: 6230143740205316414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fb6e90783f74b49affb7c595f0f82d, type: 3}
+  m_Script: {fileID: 11500000, guid: 61ecdc4dac73a564997c3bc19ce61608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteLocation: 0
   spriteRotation: -45
-  spriteDistance: 0.5
-  sprite: {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
-  chargeSprites:
-  - {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
-  - {fileID: 8952162787185664858, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
-  - {fileID: -434252183827366392, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
+  spriteDistance: 1
+  sprite: {fileID: 21300000, guid: 7a8c68b95760ff942aefae328092c811, type: 3}
+  chargeSprites: []
   chargeKey: 0
-  arrowPrefab: {fileID: 6159555893465035682, guid: fc326e81ba53d4e4aa99e969e337574a,
+  thrustPrefab: {fileID: 5114277006559662175, guid: ab55b8f98f078dd4f9b0679f30ce71f8,
     type: 3}
