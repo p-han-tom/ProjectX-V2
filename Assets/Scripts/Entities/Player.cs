@@ -70,7 +70,7 @@ public class Player : Entity
                 {
                     if (weapons[i] == null)
                     {
-                        inventory.SetItemAbility(pickingUpItem.GetItemData(), i);
+                        inventory.SetItemAbility(pickingUpItem.GetItemData(), effect, i);
                         weapons[i] = effect;
                         weapons[i].transform.parent = transform;
                         break;
@@ -83,7 +83,7 @@ public class Player : Entity
                 {
                     if (trinkets[i] == null)
                     {
-                        inventory.SetItemTrinket(pickingUpItem.GetItemData(), i);
+                        inventory.SetItemTrinket(pickingUpItem.GetItemData(), effect, i);
                         trinkets[i] = effect;
                         trinkets[i].transform.parent = transform;
                         effect.GetComponent<Passive>().owner = this;
@@ -91,10 +91,14 @@ public class Player : Entity
                     }
                 }
             }
-
             GameObject destroyThis = nearbyItems[0].gameObject;
             nearbyItems.Remove(nearbyItems[0]);
             Destroy(destroyThis);
+        }
+    }
+    public void UpdateInventory() {
+        for (int i = 0; i < weapons.Length; i++) {
+            weapons[i] = inventory.abilitySlots[i].GetItemObject();
         }
     }
     void Move()

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public abstract class SlotHandler : MonoBehaviour
 {
+    protected GameObject itemObject;
     protected ItemData itemData;
     protected Image slotImage;
     protected virtual void Start()
@@ -25,8 +26,13 @@ public abstract class SlotHandler : MonoBehaviour
         this.itemData = itemData;
         SetItemSprite(itemData.sprite);
     }
+    public virtual void SetItemObject(GameObject itemObject) {
+        this.itemObject = itemObject;
+    }
+    public GameObject GetItemObject() {return itemObject;}
     public void RemoveItem() {
         itemData = null;
+        itemObject = null;
         slotImage.enabled = false;
     }
     protected void SetItemSprite(Sprite sprite)

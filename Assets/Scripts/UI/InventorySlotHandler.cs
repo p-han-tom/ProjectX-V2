@@ -6,11 +6,14 @@ using UnityEngine.EventSystems;
 
 public class InventorySlotHandler : SlotHandler, IPointerClickHandler
 {
+    
+    InventoryHandler inventory;
     MouseSlotHandler mouseSlot;
     protected override void Start()
     {
         base.Start();
-        mouseSlot = transform.parent.parent.parent.Find("Mouse Slot").GetComponent<MouseSlotHandler>();
+        inventory = transform.parent.parent.parent.GetComponent<InventoryHandler>();
+        mouseSlot = inventory.transform.Find("Mouse Slot").GetComponent<MouseSlotHandler>();
     }
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -21,12 +24,15 @@ public class InventorySlotHandler : SlotHandler, IPointerClickHandler
         if (mouseSlot.GetItemData() == null)
         {
             mouseSlot.SetItemData(itemData);
+            mouseSlot.SetItemObject(itemObject);
             mouseSlot.homeSlot = this;
             RemoveItem();
         }
         else {
             SetItemData(mouseSlot.GetItemData());
+            SetItemObject(mouseSlot.GetItemObject());
             mouseSlot.RemoveItem();
         }
+        inventory.UpdatePlayerInventory();
     }
 }
