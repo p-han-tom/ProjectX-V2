@@ -74,7 +74,7 @@ public class Player : Entity
         {
             Item pickingUpItem = nearbyItems[0];
             GameObject effect = Instantiate(pickingUpItem.item.active);
-            if (effect.GetComponent<Active>() != null)
+            if (pickingUpItem.GetItemData().itemType == ItemData.ItemType.Active)
             {
                 for (int i = 0; i < weapons.Length; i++)
                 {
@@ -87,7 +87,7 @@ public class Player : Entity
                     }
                 }
             }
-            else if (effect.GetComponent<Passive>() != null)
+            else if (pickingUpItem.GetItemData().itemType == ItemData.ItemType.Trinket)
             {
                 for (int i = 0; i < trinkets.Length; i++)
                 {
@@ -109,6 +109,9 @@ public class Player : Entity
     public void UpdateInventory() {
         for (int i = 0; i < weapons.Length; i++) {
             weapons[i] = inventory.abilitySlots[i].GetItemObject();
+        }
+        for (int i = 0; i < trinkets.Length; i++) {
+            trinkets[i] = inventory.trinketSlots[i].GetItemObject();
         }
     }
     void Move()

@@ -11,5 +11,7 @@ public class ItemData : ScriptableObject
 
     [Range(1,5)]
     public int rarity;
+    public enum ItemType {Active, Trinket, Consumable}
+    public ItemType itemType;
     public GameObject active;
 }

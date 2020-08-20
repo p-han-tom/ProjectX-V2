@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 279024f46516de04f909eda6c455f951, type: 3}
-  m_Name: Item_TestBow
+  m_Name: item_TestBow
   m_EditorClassIdentifier: 
   name: TestBow
   sprite: {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   rarity: 2
+  itemType: 0
   active: {fileID: 1946642229903506906, guid: 6d57b0fbd0924754e855f9061bf24af0, type: 3}
