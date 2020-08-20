@@ -8,7 +8,7 @@ public class Active_DashCloak : Weapon
     public GameObject ghostTrail;
     
     protected override string name {get {return "Dash Cloak";}}
-    protected override float cooldown {get {return 5f;}}
+    protected override float cooldown {get {return 2f;}}
 
     float dashTimer = 0.075f;
     float dashTime = 0f;
@@ -34,7 +34,10 @@ public class Active_DashCloak : Weapon
 
     public override void Cast(Transform source, int abilityLevel) {
         base.Cast(source, abilityLevel);
+
+        if (OnCooldown()) return;
         dashDirection = this.source.castDirection;
         dashTime = dashTimer;
+        StartCooldown();
     }
 }
