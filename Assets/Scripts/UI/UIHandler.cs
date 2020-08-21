@@ -5,9 +5,11 @@ using UnityEngine;
 public class UIHandler : MonoBehaviour
 {
     GameObject inventory;
+    GameObject hud;
     void Start()
     {
         inventory = transform.Find("Inventory").gameObject;
+        hud = transform.Find("HUD").gameObject;
         CloseInventory();
     }
 
