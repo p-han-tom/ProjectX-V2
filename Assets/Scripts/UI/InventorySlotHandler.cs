@@ -34,23 +34,23 @@ public class InventorySlotHandler : SlotHandler, IPointerClickHandler
         {
             if (slotType.ToString() == mouseSlot.GetItemData().itemType.ToString() || slotType == SlotType.Storage)
             {
+                // switch with slot
                 if (itemData != null && itemObject != null)
                 {
-                    // switch em
                     ItemData tempItemData = itemData;
                     GameObject tempItemObject = itemObject;
                     SetItemData(mouseSlot.GetItemData());
                     SetItemObject(mouseSlot.GetItemObject());
                     mouseSlot.homeSlot.SetItemData(tempItemData);
                     mouseSlot.homeSlot.SetItemObject(tempItemObject);
-                    mouseSlot.RemoveItem();
                 }
+                // drop into empty slot
                 else
                 {
                     SetItemData(mouseSlot.GetItemData());
                     SetItemObject(mouseSlot.GetItemObject());
-                    mouseSlot.RemoveItem();
                 }
+                mouseSlot.RemoveItem();
             }
             else {
                 mouseSlot.ReturnItemToHome();

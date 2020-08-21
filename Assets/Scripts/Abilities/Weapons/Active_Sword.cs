@@ -15,6 +15,7 @@ public class Active_Sword : Active
         crescent = Instantiate(crescentPrefab, source.transform.position, Quaternion.identity);
         crescent.GetComponent<AbilityPrefab>().source = source;
         crescent.GetComponent<AbilityPrefab>().knockbackPower = 10f;
+        ModifyMeleeSize(crescent);
         crescent.transform.up = source.GetComponent<Entity>().castDirection;
         crescent.transform.position += new Vector3(source.castDirection.x, source.castDirection.y, 0);
     }

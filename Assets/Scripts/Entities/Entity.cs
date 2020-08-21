@@ -19,6 +19,12 @@ public abstract class Entity : MonoBehaviour
     protected Stat maxHP;
     protected float currentHP;
 
+    // Modifiers
+    public Stat modHP = new Stat(1);
+    public Stat modAttackSize = new Stat(1);
+    public Stat modMeleeAttackSize = new Stat(1);
+    public Stat modRangedAttackSize = new Stat(1);
+
     // Abilities
     protected GameObject[] weapons;
     public Vector2 castDirection;

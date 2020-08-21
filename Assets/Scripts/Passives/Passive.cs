@@ -13,7 +13,7 @@ public abstract class Passive : MonoBehaviour
     /// If this is a trinket, then duration has no effect (Infinite duration).</summary>
     protected float duration = 5f;
     [HideInInspector] public Entity owner;
-    protected abstract void TickEffect();
+    protected virtual void TickEffect(){}
     public void UpdateTimeElapsed()
     {
         if (tickSpeed() > 0)
@@ -32,4 +32,6 @@ public abstract class Passive : MonoBehaviour
             }
         }
     }
+    public virtual void OnEquip(){}
+    public virtual void OnUnequip(){}
 }
