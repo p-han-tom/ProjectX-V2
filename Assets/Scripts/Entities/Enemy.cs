@@ -32,7 +32,7 @@ public class Enemy : Entity
         targetIndex = 0;
         Vector3 currentWaypoint = path[0];
         while (true) {
-            if (Vector2.Distance(transform.position, currentWaypoint) < 0.5f) {
+            if (Vector2.Distance(transform.position, currentWaypoint) < 0.15f) {
                 targetIndex ++;
                 if (targetIndex >= path.Length) {
                     yield break;
@@ -40,8 +40,12 @@ public class Enemy : Entity
                 currentWaypoint = path[targetIndex];
             }
 
-            Vector2 movement = new Vector2(currentWaypoint.x - transform.position.x, currentWaypoint.y - transform.position.y).normalized * movementSpeed.value();
-            rb.velocity = movement;
+            Vector2 movement = (currentWaypoint-transform.position).normalized;
+            rb.velocity = movement * 5;
+
+            // rb.AddForce (movement);
+
+			// transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,2 * Time.deltaTime);
             yield return null;
         }
     }

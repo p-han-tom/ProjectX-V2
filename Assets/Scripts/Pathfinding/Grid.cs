@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,9 +82,5 @@ public class Grid : MonoBehaviour
                 grid[x,y] = new Node(walkable, worldPoint, x, y);
             }
         }
-    }
-
-    void Update() {
-        CreateGrid();
     }
 }
