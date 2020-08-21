@@ -16,14 +16,20 @@ public class AbilitySlotHandler : SlotHandler
     {
         UpdateTimerFill();
     }
-    void UpdateTimerFill() {
-        Active ability = itemObject.GetComponent<Active>();
-        float currentCooldown = ability.GetCurrentCooldown();
-        if (currentCooldown > 0) {
-            timerFill.fillAmount = currentCooldown/ability.GetCooldown();
-        }
-        else {
-            timerFill.fillAmount = 0;
+    void UpdateTimerFill()
+    {
+        if (itemObject != null)
+        {
+            Active ability = itemObject.GetComponent<Active>();
+            float currentCooldown = ability.GetCurrentCooldown();
+            if (currentCooldown > 0)
+            {
+                timerFill.fillAmount = currentCooldown / ability.GetCooldown();
+            }
+            else
+            {
+                timerFill.fillAmount = 0;
+            }
         }
     }
 }

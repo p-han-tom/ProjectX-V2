@@ -48,9 +48,9 @@ MonoBehaviour:
   spriteDistance: 0.5
   sprite: {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   chargeSprites:
-  - {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   - {fileID: 8952162787185664858, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   - {fileID: -434252183827366392, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
+  - {fileID: 1131549020000966294, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   chargeKey: 0
   arrowPrefab: {fileID: 6159555893465035682, guid: fc326e81ba53d4e4aa99e969e337574a,
     type: 3}
