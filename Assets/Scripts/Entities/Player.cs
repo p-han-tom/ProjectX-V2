@@ -9,7 +9,9 @@ public class Player : Entity
 
     // Children
     Transform pivot;
+    UIHandler ui;
     InventoryHandler inventory;
+    HUDHandler hud;
 
     protected override void Start()
     {
@@ -18,7 +20,9 @@ public class Player : Entity
         pivot = transform.Find("Pivot");
         weapons = new GameObject[4];
         trinkets = new GameObject[4];
-        inventory = GameObject.Find("UI").transform.Find("Inventory").GetComponent<InventoryHandler>();
+        ui = GameObject.Find("UI").GetComponent<UIHandler>();
+        inventory = ui.transform.Find("Inventory").GetComponent<InventoryHandler>();
+        hud = ui.transform.Find("HUD").GetComponent<HUDHandler>();
     }
 
     protected override void Update()
@@ -74,7 +78,7 @@ public class Player : Entity
         {
             Item pickingUpItem = nearbyItems[0];
             GameObject effect = Instantiate(pickingUpItem.item.active);
-            if (effect.GetComponent<Active>() != null)
+            if (pickingUpItem.GetItemData().itemType == ItemData.ItemType.Active)
             {
                 for (int i = 0; i < weapons.Length; i++)
                 {
@@ -87,7 +91,7 @@ public class Player : Entity
                     }
                 }
             }
-            else if (effect.GetComponent<Passive>() != null)
+            else if (pickingUpItem.GetItemData().itemType == ItemData.ItemType.Trinket)
             {
                 for (int i = 0; i < trinkets.Length; i++)
                 {
@@ -104,11 +108,18 @@ public class Player : Entity
             GameObject destroyThis = nearbyItems[0].gameObject;
             nearbyItems.Remove(nearbyItems[0]);
             Destroy(destroyThis);
+            UpdateAbilities();
         }
     }
-    public void UpdateInventory() {
+    public void UpdateAbilities() {
         for (int i = 0; i < weapons.Length; i++) {
             weapons[i] = inventory.abilitySlots[i].GetItemObject();
+            hud.abilitySlots[i].RemoveItem();
+            hud.abilitySlots[i].SetItemData(inventory.abilitySlots[i].GetItemData());
+            hud.abilitySlots[i].SetItemObject(inventory.abilitySlots[i].GetItemObject());
+        }
+        for (int i = 0; i < trinkets.Length; i++) {
+            trinkets[i] = inventory.trinketSlots[i].GetItemObject();
         }
     }
     void Move()

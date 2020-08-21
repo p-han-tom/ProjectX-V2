@@ -24,6 +24,6 @@ public class InventoryHandler : MonoBehaviour
         trinketSlots[slot].SetItemObject(itemObject);
     }
     public void UpdatePlayerInventory() {
-        player.UpdateInventory();
+        player.UpdateAbilities();
     }
 }

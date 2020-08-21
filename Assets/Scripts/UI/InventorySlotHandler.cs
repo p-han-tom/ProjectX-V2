@@ -32,22 +32,28 @@ public class InventorySlotHandler : SlotHandler, IPointerClickHandler
         // Else if item is already held drop it or switch it
         else
         {
-            if (itemData != null && itemObject != null)
+            if (slotType.ToString() == mouseSlot.GetItemData().itemType.ToString() || slotType == SlotType.Storage)
             {
-                // switch em
-                ItemData tempItemData = itemData;
-                GameObject tempItemObject = itemObject;
-                SetItemData(mouseSlot.GetItemData());
-                SetItemObject(mouseSlot.GetItemObject());
-                mouseSlot.homeSlot.SetItemData(tempItemData);
-                mouseSlot.homeSlot.SetItemObject(tempItemObject);
-                mouseSlot.RemoveItem();
+                if (itemData != null && itemObject != null)
+                {
+                    // switch em
+                    ItemData tempItemData = itemData;
+                    GameObject tempItemObject = itemObject;
+                    SetItemData(mouseSlot.GetItemData());
+                    SetItemObject(mouseSlot.GetItemObject());
+                    mouseSlot.homeSlot.SetItemData(tempItemData);
+                    mouseSlot.homeSlot.SetItemObject(tempItemObject);
+                    mouseSlot.RemoveItem();
+                }
+                else
+                {
+                    SetItemData(mouseSlot.GetItemData());
+                    SetItemObject(mouseSlot.GetItemObject());
+                    mouseSlot.RemoveItem();
+                }
             }
-            else
-            {
-                SetItemData(mouseSlot.GetItemData());
-                SetItemObject(mouseSlot.GetItemObject());
-                mouseSlot.RemoveItem();
+            else {
+                mouseSlot.ReturnItemToHome();
             }
         }
         inventory.UpdatePlayerInventory();

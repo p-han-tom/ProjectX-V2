@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public abstract class SlotHandler : MonoBehaviour
 {
+    public enum SlotType {Active, Trinket, Storage}
+    public SlotType slotType;
+    [HideInInspector] public InventorySlotHandler homeSlot;
     protected GameObject itemObject;
     protected ItemData itemData;
     protected Image slotImage;
@@ -24,7 +27,8 @@ public abstract class SlotHandler : MonoBehaviour
     public virtual void SetItemData(ItemData itemData)
     {
         this.itemData = itemData;
-        SetItemSprite(itemData.sprite);
+        if (itemData != null)
+            SetItemSprite(itemData.sprite);
     }
     public virtual void SetItemObject(GameObject itemObject) {
         this.itemObject = itemObject;

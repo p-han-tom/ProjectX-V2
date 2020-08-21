@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MouseSlotHandler : SlotHandler
 {
-    public InventorySlotHandler homeSlot;
     Camera cameraMain;
     protected override void Start()
     {

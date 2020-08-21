@@ -15,4 +15,5 @@ MonoBehaviour:
   name: TestBow
   sprite: {fileID: -415446080585258355, guid: bba7b3cc38ab37f46b50a8b0dafd2c46, type: 3}
   rarity: 2
+  itemType: 0
   active: {fileID: 1946642229903506906, guid: 6d57b0fbd0924754e855f9061bf24af0, type: 3}
