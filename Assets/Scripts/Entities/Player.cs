@@ -54,7 +54,7 @@ public class Player : Entity
         if (Input.GetKey(KeyCode.Mouse0))
         {
             weapons[0].GetComponent<Active>().Cast(transform, 1);
-            
+
         }
 
         if (Input.GetKey(KeyCode.Mouse1))
@@ -111,14 +111,17 @@ public class Player : Entity
             UpdateAbilities();
         }
     }
-    public void UpdateAbilities() {
-        for (int i = 0; i < weapons.Length; i++) {
+    public void UpdateAbilities()
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
             weapons[i] = inventory.abilitySlots[i].GetItemObject();
             hud.abilitySlots[i].RemoveItem();
             hud.abilitySlots[i].SetItemData(inventory.abilitySlots[i].GetItemData());
             hud.abilitySlots[i].SetItemObject(inventory.abilitySlots[i].GetItemObject());
         }
-        for (int i = 0; i < trinkets.Length; i++) {
+        for (int i = 0; i < trinkets.Length; i++)
+        {
             trinkets[i] = inventory.trinketSlots[i].GetItemObject();
         }
     }
@@ -158,12 +161,20 @@ public class Player : Entity
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        OnTriggerEnter2DAddNearbyItems(other);
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        OnTriggerExit2DRemoveLeftItems(other);
+    }
+    void OnTriggerEnter2DAddNearbyItems(Collider2D other)
+    {
         if (other.GetComponent<Item>() != null)
         {
             nearbyItems.Add(other.GetComponent<Item>());
         }
     }
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2DRemoveLeftItems(Collider2D other)
     {
         if (other.GetComponent<Item>() != null)
         {
