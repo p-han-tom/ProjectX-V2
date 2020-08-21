@@ -15,6 +15,7 @@ public class Active_Spear : Active
         thrust = Instantiate(thrustPrefab, source.transform.position, Quaternion.identity);
         thrust.GetComponent<AbilityPrefab>().source = source;
         thrust.GetComponent<AbilityPrefab>().knockbackPower = 15f;
+        ModifyMeleeSize(thrust);
         thrust.transform.up = source.GetComponent<Entity>().castDirection;
         thrust.transform.position += new Vector3(source.castDirection.x, source.castDirection.y, 0) * 2f;
     }

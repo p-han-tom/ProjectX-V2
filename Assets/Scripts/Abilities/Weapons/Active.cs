@@ -94,7 +94,10 @@ public abstract class Active : MonoBehaviour
         }   
     }
 
-
+    public void ModifyMeleeSize(GameObject meleeAttack) {
+        float meleeSizeMod = source.modMeleeAttackSize.value();
+        meleeAttack.transform.localScale = new Vector3(meleeSizeMod, meleeSizeMod, 1);
+    }
     // Cooldown related
     public virtual void StartCooldown() {currentCooldown = cooldown;}
     public virtual void DecreaseCooldown() {currentCooldown -= Time.deltaTime;}

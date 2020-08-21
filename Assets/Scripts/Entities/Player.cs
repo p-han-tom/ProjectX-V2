@@ -97,10 +97,10 @@ public class Player : Entity
                 {
                     if (trinkets[i] == null)
                     {
+                        effect.GetComponent<Passive>().owner = this;
                         inventory.SetItemTrinket(pickingUpItem.GetItemData(), effect, i);
                         trinkets[i] = effect;
                         trinkets[i].transform.parent = transform;
-                        effect.GetComponent<Passive>().owner = this;
                         break;
                     }
                 }

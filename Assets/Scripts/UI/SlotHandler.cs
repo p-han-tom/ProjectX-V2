@@ -27,14 +27,15 @@ public abstract class SlotHandler : MonoBehaviour
     public virtual void SetItemData(ItemData itemData)
     {
         this.itemData = itemData;
-        if (itemData != null)
-            SetItemSprite(itemData.sprite);
+        if (itemData != null) SetItemSprite(itemData.sprite);
     }
     public virtual void SetItemObject(GameObject itemObject) {
         this.itemObject = itemObject;
+        if (slotType == SlotType.Trinket) itemObject.GetComponent<Passive>().OnEquip();
     }
     public GameObject GetItemObject() {return itemObject;}
     public void RemoveItem() {
+        if (itemData != null && slotType == SlotType.Trinket) itemObject.GetComponent<Passive>().OnUnequip();
         itemData = null;
         itemObject = null;
         slotImage.enabled = false;
