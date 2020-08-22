@@ -6,10 +6,12 @@ public class UIHandler : MonoBehaviour
 {
     GameObject inventory;
     GameObject hud;
+    GameObject abilityBar;
     void Start()
     {
         inventory = transform.Find("Inventory").gameObject;
         hud = transform.Find("HUD").gameObject;
+        abilityBar = hud.transform.Find("Ability Bar").gameObject;
         CloseInventory();
     }
 

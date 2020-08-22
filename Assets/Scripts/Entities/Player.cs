@@ -50,26 +50,28 @@ public class Player : Entity
         {
             PickupItem();
         }
-
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (inventory.gameObject.activeSelf == false)
         {
-            weapons[0].GetComponent<Active>().Cast(transform, 1);
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                weapons[0].GetComponent<Active>().Cast(transform, 1);
 
-        }
+            }
 
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            weapons[1].GetComponent<Active>().Cast(transform, 1);
-        }
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                weapons[1].GetComponent<Active>().Cast(transform, 1);
+            }
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            weapons[2].GetComponent<Active>().Cast(transform, 1);
-        }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                weapons[2].GetComponent<Active>().Cast(transform, 1);
+            }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            weapons[3].GetComponent<Active>().Cast(transform, 1);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                weapons[3].GetComponent<Active>().Cast(transform, 1);
+            }
         }
     }
     void PickupItem()
