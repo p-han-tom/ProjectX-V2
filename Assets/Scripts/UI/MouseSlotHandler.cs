@@ -5,6 +5,7 @@ using UnityEngine;
 public class MouseSlotHandler : SlotHandler
 {
     Camera cameraMain;
+    UIHandler ui;
     protected override void Start()
     {
         base.Start();
