@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class UIHandler : MonoBehaviour
@@ -11,13 +12,17 @@ public class UIHandler : MonoBehaviour
     Vector3 abilityBarStartPos;
     Vector3 inventoryStartPos;
     MouseSlotHandler mouseSlot;
+    Image darkener;
     public AbilitySlotHandler[] abilitySlots;
     Player player;
+    Ease transitionEase = Ease.InOutCubic;
+    float transitionSpeed = 0.3f;
     
     void Start()
     {
         inventory = transform.Find("Inventory").gameObject;
         abilityBar = transform.Find("Ability Bar").gameObject;
+        darkener = transform.Find("Darkener").GetComponent<Image>();
         inventoryStartPos = inventory.transform.localPosition;
         abilityBarStartPos = abilityBar.transform.localPosition;
         player = GameObject.Find("Player").GetComponent<Player>();
@@ -47,13 +52,15 @@ public class UIHandler : MonoBehaviour
     }
     void OpenInventory()
     {
-        abilityBar.transform.DOLocalMoveY(-300, 0.5f);
-        inventory.transform.DOLocalMoveY(0, 0.5f);
+        darkener.DOFade(0.3f, transitionSpeed);
+        abilityBar.transform.DOLocalMoveY(-300, transitionSpeed).SetEase(transitionEase);
+        inventory.transform.DOLocalMoveY(0, transitionSpeed).SetEase(transitionEase);
     }
     void CloseInventory()
     {
+        darkener.DOFade(0, transitionSpeed);
         mouseSlot.ReturnItemToHome();
-        abilityBar.transform.DOLocalMoveY(abilityBarStartPos.y, 0.5f);
-        inventory.transform.DOLocalMoveY(inventoryStartPos.y, 0.5f);
+        abilityBar.transform.DOLocalMoveY(abilityBarStartPos.y, transitionSpeed).SetEase(transitionEase);
+        inventory.transform.DOLocalMoveY(inventoryStartPos.y, transitionSpeed).SetEase(transitionEase);
     }
 }
