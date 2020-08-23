@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class UIHandler : MonoBehaviour
     Player player;
     Ease transitionEase = Ease.InOutCubic;
     float transitionSpeed = 0.3f;
-    
+
     void Start()
     {
         inventory = transform.Find("Inventory").gameObject;
@@ -49,6 +50,9 @@ public class UIHandler : MonoBehaviour
             }
             isInventoryOpen = !isInventoryOpen;
         }
+
+        //Debug reload scene
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void OpenInventory()
     {

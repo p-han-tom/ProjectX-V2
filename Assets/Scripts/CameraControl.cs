@@ -13,9 +13,12 @@ public class CameraControl : MonoBehaviour
     float yMaxDist = 1f;
     float cameraTime = 0.1f;
     float maxCameraSpeed = 100f;
-    void Start() {
+    void Start()
+    {
         leader = GameObject.Find("Player").transform;
+        transform.position = new Vector3(leader.position.x, leader.position.y, transform.position.z);
     }
+    public void TeleportToLeader() { transform.position = new Vector3(leader.position.x, leader.position.y, transform.position.z); }
     void FixedUpdate()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
