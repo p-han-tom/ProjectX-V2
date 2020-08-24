@@ -11,7 +11,6 @@ public class Player : Entity
     Transform pivot;
     UIHandler ui;
     InventoryHandler inventory;
-    HUDHandler hud;
 
     protected override void Start()
     {
@@ -22,7 +21,6 @@ public class Player : Entity
         trinkets = new GameObject[4];
         ui = GameObject.Find("UI").GetComponent<UIHandler>();
         inventory = ui.transform.Find("Inventory").GetComponent<InventoryHandler>();
-        hud = ui.transform.Find("HUD").GetComponent<HUDHandler>();
     }
 
     protected override void Update()
@@ -50,26 +48,28 @@ public class Player : Entity
         {
             PickupItem();
         }
-
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (ui.isInventoryOpen == false)
         {
-            weapons[0].GetComponent<Active>().Cast(transform, 1);
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                weapons[0].GetComponent<Active>().Cast(transform, 1);
 
-        }
+            }
 
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            weapons[1].GetComponent<Active>().Cast(transform, 1);
-        }
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                weapons[1].GetComponent<Active>().Cast(transform, 1);
+            }
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            weapons[2].GetComponent<Active>().Cast(transform, 1);
-        }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                weapons[2].GetComponent<Active>().Cast(transform, 1);
+            }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            weapons[3].GetComponent<Active>().Cast(transform, 1);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                weapons[3].GetComponent<Active>().Cast(transform, 1);
+            }
         }
     }
     void PickupItem()
@@ -116,9 +116,9 @@ public class Player : Entity
         for (int i = 0; i < weapons.Length; i++)
         {
             weapons[i] = inventory.abilitySlots[i].GetItemObject();
-            hud.abilitySlots[i].RemoveItem();
-            hud.abilitySlots[i].SetItemData(inventory.abilitySlots[i].GetItemData());
-            hud.abilitySlots[i].SetItemObject(inventory.abilitySlots[i].GetItemObject());
+            ui.abilitySlots[i].RemoveItem();
+            ui.abilitySlots[i].SetItemData(inventory.abilitySlots[i].GetItemData());
+            ui.abilitySlots[i].SetItemObject(inventory.abilitySlots[i].GetItemObject());
         }
         for (int i = 0; i < trinkets.Length; i++)
         {

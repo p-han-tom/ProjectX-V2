@@ -13,7 +13,7 @@ public abstract class Entity : MonoBehaviour
     protected Stat movementSpeed;
 
     // States
-    public bool underAttack;
+    [HideInInspector] public bool underAttack;
 
     // Stats
     protected Stat maxHP;
@@ -27,8 +27,8 @@ public abstract class Entity : MonoBehaviour
 
     // Abilities
     protected GameObject[] weapons;
-    public Vector2 castDirection;
-    public Vector2 castPosition;
+    [HideInInspector] public Vector2 castDirection;
+    [HideInInspector] public Vector2 castPosition;
     protected GameObject[] trinkets;
 
     protected virtual void Start()
