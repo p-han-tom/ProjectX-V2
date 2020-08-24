@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
 
 public class Pathfinding : MonoBehaviour {
-	
+
+	bool includeStartNode;
+	int asss = 0;
 	PathRequestManager requestManager;
 	Grid grid;
 	
@@ -24,8 +26,11 @@ public class Pathfinding : MonoBehaviour {
 		bool pathSuccess = false;
 		
 		Node startNode = grid.NodeFromWorldPoint(startPos);
+		includeStartNode = (grid.GetNeighbours(startNode).Count <= 4);
+		asss++;
+		Debug.Log(grid.GetNeighbours(startNode).Count + " " + startNode.worldPosition);
+
 		Node targetNode = grid.NodeFromWorldPoint(targetPos);
-		
 		
 		if (startNode.walkable && targetNode.walkable) {
 			Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
@@ -54,6 +59,8 @@ public class Pathfinding : MonoBehaviour {
 						
 						if (!openSet.Contains(neighbour))
 							openSet.Add(neighbour);
+						else 
+							openSet.UpdateItem(neighbour);
 					}
 				}
 			}
@@ -68,15 +75,14 @@ public class Pathfinding : MonoBehaviour {
 	
 	Vector3[] RetracePath(Node startNode, Node endNode) {
 		List<Node> path = new List<Node>();
+
 		Node currentNode = endNode;
-		
 		while (currentNode != startNode) {
 			path.Add(currentNode);
 			currentNode = currentNode.parent;
 		}
 		if (currentNode == startNode)
-    		path.Add(currentNode);
-
+    		path.Add(startNode);
 		Vector3[] waypoints = SimplifyPath(path);
 		Array.Reverse(waypoints);
 		return waypoints;
@@ -85,15 +91,17 @@ public class Pathfinding : MonoBehaviour {
 	
 	Vector3[] SimplifyPath(List<Node> path) {
 		List<Vector3> waypoints = new List<Vector3>();
+
 		Vector2 directionOld = Vector2.zero;
 		
 		for (int i = 1; i < path.Count; i ++) {
 			Vector2 directionNew = new Vector2(path[i-1].gridX - path[i].gridX,path[i-1].gridY - path[i].gridY);
-			if (directionNew != directionOld) {
+			if (directionNew != directionOld) 
 				waypoints.Add(path[i-1].worldPosition);
-			}
 			directionOld = directionNew;
 		}
+		if (includeStartNode) waypoints.Add(path[path.Count-1].worldPosition);
+
 		return waypoints.ToArray();
 	}
 	

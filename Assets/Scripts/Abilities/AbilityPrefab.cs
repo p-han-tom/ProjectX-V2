@@ -23,18 +23,20 @@ public abstract class AbilityPrefab : MonoBehaviour
 
     protected IEnumerator Knockback(Rigidbody2D other) {
 
+        // Prevent movement and wait for knockback duration
+        other.GetComponent<Entity>().underAttack = true;
+
         // Send initial force
         Vector2 difference = other.transform.position - source.transform.position;
         difference = difference.normalized * knockbackPower;
         other.GetComponent<Entity>().Knockback(difference);
 
-        // Prevent movement and wait for knockback duration
-        other.GetComponent<Entity>().underAttack = true;
-        yield return new WaitForSeconds(0.15f);
-
-        // Stop movement for smooth recovery
-        other.velocity = Vector2.zero;
+        
         yield return new WaitForSeconds(0.05f);
+
+        // // Stop movement for smooth recovery
+        // other.velocity = Vector2.zero;
+        // yield return new WaitForSeconds(0.05f);
 
         // Enable movement
         other.GetComponent<Entity>().underAttack = false;

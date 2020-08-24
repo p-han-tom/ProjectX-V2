@@ -14,6 +14,7 @@ public class Thrust : AbilityPrefab
 
         if (other.GetComponent<Entity>() != null) {
             other.GetComponent<Entity>().TakeDamage(damage);
+            StopCoroutine("Knockback");
             StartCoroutine(Knockback(other.GetComponent<Rigidbody2D>()));
         }        
     }

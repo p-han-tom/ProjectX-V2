@@ -5,7 +5,6 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     public bool displayGridGizmos;
-    public float nodeValue = 1;
 
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
@@ -15,6 +14,7 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX;
     int gridSizeY;
+
 
     public Node NodeFromWorldPoint(Vector3 worldPosition) {
         float percentX = (worldPosition.x + gridWorldSize.x/2) / gridWorldSize.x;
@@ -43,6 +43,14 @@ public class Grid : MonoBehaviour
                 int checkY = node.gridY + y;
 
                 if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY) {
+                    if (!grid[checkX, checkY].walkable) {
+                        neighbours.Clear();
+                        if (node.gridX - 1 >= 0) neighbours.Add(grid[node.gridX-1, node.gridY]);
+                        if (node.gridX + 1 < gridSizeX) neighbours.Add(grid[node.gridX+1, node.gridY]);
+                        if (node.gridY - 1 >= 0) neighbours.Add(grid[node.gridX, node.gridY-1]);
+                        if (node.gridY + 1 < gridSizeY) neighbours.Add(grid[node.gridX, node.gridY+1]);
+                        return neighbours;
+                    }
                     neighbours.Add(grid[checkX, checkY]);
                 }
             }
@@ -64,8 +72,8 @@ public class Grid : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
         if (grid != null && displayGridGizmos) {
             foreach (Node n in grid) {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                Gizmos.DrawCube(n.worldPosition, new Vector3(1,1,0) * (nodeDiameter-0.05f));
+                Gizmos.color = (n.walkable) ? new Color(1,1,1,0.25f) : Color.red;
+                Gizmos.DrawCube(n.worldPosition, new Vector3(1,1,0) * (nodeDiameter-0.4f));
             }
         }
     }
@@ -78,7 +86,8 @@ public class Grid : MonoBehaviour
         for (int x = 0; x < gridSizeX; x ++) {
             for (int y = 0; y < gridSizeY; y ++) {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius*nodeValue, unwalkableMask));
+                bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius/2, unwalkableMask));
+                
                 grid[x,y] = new Node(walkable, worldPoint, x, y);
             }
         }
