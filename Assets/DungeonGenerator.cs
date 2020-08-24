@@ -7,7 +7,7 @@ public class DungeonGenerator : MonoBehaviour
 {
     // roomsources[0] is always walls.png (all black)
     public Sprite[] roomSources;
-    public Tile wallTiles;
+    public RuleTile wallTiles;
     public Tile groundTiles;
     int roomWidth = 20;
     int roomHeight = 16;
