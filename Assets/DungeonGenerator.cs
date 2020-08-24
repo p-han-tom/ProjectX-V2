@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 public class DungeonGenerator : MonoBehaviour
 {
     // roomsources[0] is always walls.png (all black)
+    // roomsources[1] is always start.png
+    // roomsources[2] is always exit.png
     public Sprite[] roomSources;
     public RuleTile wallTiles;
     public Tile groundTiles;
@@ -43,7 +45,8 @@ public class DungeonGenerator : MonoBehaviour
         // int randomy = Random.Range(0, dungeonIntArray.GetLength(1) - 1);
         int randomx = dungeonIntArray.GetLength(1) / 2;
         int randomy = dungeonIntArray.GetLength(0) / 2;
-        dungeonIntArray[randomx, randomy] = RandomRoomIndex();
+        // dungeonIntArray[randomx, randomy] = RandomRoomIndex();
+        dungeonIntArray[randomx, randomy] = 1;
         GameObject.Find("Player").transform.position = new Vector3(randomy * roomWidth + roomWidth / 2, randomx * roomHeight + roomHeight / 2, 1);
         Camera.main.GetComponent<CameraControl>().TeleportToLeader();
         for (int w = 0; w < numberOfWalkers; w++)
@@ -75,7 +78,7 @@ public class DungeonGenerator : MonoBehaviour
                             break;
                         }
                 }
-                if (IsValidSpace(walkerPos.x, walkerPos.y))
+                if (IsValidSpace(walkerPos.x, walkerPos.y) && dungeonIntArray[walkerPos.y, walkerPos.x] != 1 && dungeonIntArray[walkerPos.y, walkerPos.x] != 2)
                 {
                     dungeonIntArray[walkerPos.y, walkerPos.x] = RandomRoomIndex();
                 }
@@ -137,14 +140,14 @@ public class DungeonGenerator : MonoBehaviour
                     // right
                     if (IsValidSpace(i, j + 1) && dungeonIntArray[i, j + 1] != 0)
                     {
-                        Vector3Int pos1 = new Vector3Int((j+1) * roomWidth-1, i * roomHeight + roomHeight / 2, 1);
+                        Vector3Int pos1 = new Vector3Int((j + 1) * roomWidth - 1, i * roomHeight + roomHeight / 2, 1);
                         CreateExit(pos1, new Vector3Int(0, -1, 0));
                     }
                 }
             }
         }
     }
-    int RandomRoomIndex() { return Random.Range(1, roomSources.Length); }
+    int RandomRoomIndex() { return Random.Range(3, roomSources.Length); }
     Direction RandomDirection() { return (Direction)Random.Range(0, 4); }
     bool IsValidSpace(int col, int row)
     {
