@@ -19,7 +19,7 @@ public class Enemy : Entity
     {
         base.Start();
         target = GameObject.Find("Player").transform;
-        movementSpeed = new Stat(1.75f);
+        movementSpeed = new Stat(3f);
         grid = GameObject.Find("Pathfinding").GetComponent<Grid>();
 
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
@@ -35,6 +35,7 @@ public class Enemy : Entity
     }
 
     IEnumerator FollowPath() {
+        if (path.Length == 0) yield break;
         targetIndex = 0;
         currentWaypoint = path[0];
 
@@ -61,9 +62,8 @@ public class Enemy : Entity
                     yield break;
                 }
             }
-                                    // if (collidedWithObstacle && targetIndex > 0) targetIndex --;
 
-                            currentWaypoint = path[targetIndex];
+            currentWaypoint = path[targetIndex];
 
 
 

@@ -10,6 +10,8 @@ public abstract class AbilityPrefab : MonoBehaviour
     // On hit values
     [HideInInspector] public float damage;
     [HideInInspector] public float knockbackPower;
+    protected float knockbackDuration = 0.15f;
+    protected float recoveryDuration = 0.05f;
 
     protected LayerMask sourceLayer;
 
@@ -23,25 +25,28 @@ public abstract class AbilityPrefab : MonoBehaviour
 
     protected IEnumerator Knockback(Rigidbody2D other) {
 
-        // Prevent movement and wait for knockback duration
         other.GetComponent<Entity>().underAttack = true;
+        other.velocity = Vector2.zero;
 
         // Send initial force
         Vector2 difference = other.transform.position - source.transform.position;
         difference = difference.normalized * knockbackPower;
         other.GetComponent<Entity>().Knockback(difference);
+        yield return new WaitForSeconds(knockbackDuration);
 
-        
-        yield return new WaitForSeconds(0.05f);
-
-        // // Stop movement for smooth recovery
-        // other.velocity = Vector2.zero;
-        // yield return new WaitForSeconds(0.05f);
+        // Stop movement for smooth recovery
+        other.velocity = Vector2.zero;
+        yield return new WaitForSeconds(recoveryDuration);
 
         // Enable movement
         other.GetComponent<Entity>().underAttack = false;
         Destroy(gameObject);
 
+    }
+
+    protected virtual void DestroyIfMissed()
+    {
+        Destroy(gameObject, knockbackDuration*2+recoveryDuration);
     }
 
 

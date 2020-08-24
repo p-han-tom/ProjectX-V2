@@ -8,13 +8,13 @@ public class Crescent : AbilityPrefab
     protected override void Start()
     {
         base.Start();
+        DestroyIfMissed();
     }
 
     protected override void OnHit(Transform other) {
 
         if (other.GetComponent<Entity>() != null) {
             other.GetComponent<Entity>().TakeDamage(damage);
-            StopCoroutine("Knockback");
             StartCoroutine(Knockback(other.GetComponent<Rigidbody2D>()));
         }        
     }

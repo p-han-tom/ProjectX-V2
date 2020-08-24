@@ -28,7 +28,6 @@ public class Pathfinding : MonoBehaviour {
 		Node startNode = grid.NodeFromWorldPoint(startPos);
 		includeStartNode = (grid.GetNeighbours(startNode).Count <= 4);
 		asss++;
-		Debug.Log(grid.GetNeighbours(startNode).Count + " " + startNode.worldPosition);
 
 		Node targetNode = grid.NodeFromWorldPoint(targetPos);
 		
@@ -81,8 +80,8 @@ public class Pathfinding : MonoBehaviour {
 			path.Add(currentNode);
 			currentNode = currentNode.parent;
 		}
-		if (currentNode == startNode)
-    		path.Add(startNode);
+    	path.Add(startNode);
+
 		Vector3[] waypoints = SimplifyPath(path);
 		Array.Reverse(waypoints);
 		return waypoints;

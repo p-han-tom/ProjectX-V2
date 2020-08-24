@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 414337443}
   - component: {fileID: 414337442}
   - component: {fileID: 414337441}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2563,7 +2563,7 @@ PrefabInstance:
     - target: {fileID: 2833948904113534601, guid: e436ee35ac5a96748bb5ee3be9e128c3,
         type: 3}
       propertyPath: gridWorldSize.x
-      value: 12
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 2833948904113534601, guid: e436ee35ac5a96748bb5ee3be9e128c3,
         type: 3}
