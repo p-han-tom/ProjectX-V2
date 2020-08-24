@@ -44,9 +44,13 @@ public abstract class AbilityPrefab : MonoBehaviour
 
     }
 
+    protected virtual void DisableIfAttackMissed() {
+
+    }
+
     protected virtual void DestroyIfMissed()
     {
-        Destroy(gameObject, knockbackDuration*2+recoveryDuration);
+        Destroy(gameObject, knockbackDuration+recoveryDuration+0.5f);
     }
 
 
