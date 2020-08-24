@@ -5,16 +5,17 @@ using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    // roomsources[0] is always walls.png (all black)
-    // roomsources[1] is always start.png
-    // roomsources[2] is always exit.png
+    public Sprite filledRoomSource;
+    public Sprite[] specialRoomSources;
     public Sprite[] roomSources;
     public RuleTile wallTiles;
     public Tile groundTiles;
     int roomWidth = 20;
     int roomHeight = 16;
     enum Direction { up, down, left, right }
+    enum RoomType { normal, special, filled } // maybe prefab room type for special rooms
     int[,] dungeonIntArray = new int[10, 10];
+    RoomType[,] dungeonRoomTypeArray;
     int numberOfRooms = 6;
     int numberOfWalkers = 2;
     int walkerLifespan = 4;
@@ -24,6 +25,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         groundTilemap = GameObject.Find("Grid").transform.Find("Ground").GetComponent<Tilemap>();
         wallTilemap = GameObject.Find("Grid").transform.Find("Walls").GetComponent<Tilemap>();
+        dungeonRoomTypeArray = new RoomType[dungeonIntArray.GetLength(0), dungeonIntArray.GetLength(1)];
         FillWithWalls();
         AddRooms();
         DrawTiles();
@@ -35,6 +37,7 @@ public class DungeonGenerator : MonoBehaviour
             for (int j = 0; j < dungeonIntArray.GetLength(1); j++)
             {
                 dungeonIntArray[i, j] = 0;
+                dungeonRoomTypeArray[i, j] = RoomType.filled;
             }
         }
     }
@@ -46,7 +49,8 @@ public class DungeonGenerator : MonoBehaviour
         int randomx = dungeonIntArray.GetLength(1) / 2;
         int randomy = dungeonIntArray.GetLength(0) / 2;
         // dungeonIntArray[randomx, randomy] = RandomRoomIndex();
-        dungeonIntArray[randomx, randomy] = 1;
+        dungeonIntArray[randomx, randomy] = 0; // 0 is index of starting room
+        dungeonRoomTypeArray[randomx, randomy] = RoomType.special;
         GameObject.Find("Player").transform.position = new Vector3(randomy * roomWidth + roomWidth / 2, randomx * roomHeight + roomHeight / 2, 1);
         Camera.main.GetComponent<CameraControl>().TeleportToLeader();
         for (int w = 0; w < numberOfWalkers; w++)
@@ -78,9 +82,10 @@ public class DungeonGenerator : MonoBehaviour
                             break;
                         }
                 }
-                if (IsValidSpace(walkerPos.x, walkerPos.y) && dungeonIntArray[walkerPos.y, walkerPos.x] != 1 && dungeonIntArray[walkerPos.y, walkerPos.x] != 2)
+                if (IsValidSpace(walkerPos.x, walkerPos.y) && dungeonRoomTypeArray[walkerPos.y, walkerPos.x] != RoomType.special)
                 {
                     dungeonIntArray[walkerPos.y, walkerPos.x] = RandomRoomIndex();
+                    dungeonRoomTypeArray[walkerPos.y, walkerPos.x] = RoomType.normal;
                 }
                 else break;
             }
@@ -92,22 +97,33 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int j = 0; j < dungeonIntArray.GetLength(1); j++)
             {
-                Texture2D roomSource = roomSources[dungeonIntArray[i, j]].texture;
-                for (int k = 0; k < roomHeight; k++)
+                if (dungeonRoomTypeArray[i, j] != RoomType.filled)
                 {
-                    for (int l = 0; l < roomWidth; l++)
+                    Texture2D roomSource = null;
+                    if (dungeonRoomTypeArray[i, j] == RoomType.normal)
                     {
-                        Vector3Int tilePosition = new Vector3Int(j * roomWidth + l, i * roomHeight + k, 1);
-                        Color pixelColor = roomSource.GetPixel(l, k);
-                        if (pixelColor == Color.black)
+                        roomSource = roomSources[dungeonIntArray[i, j]].texture;
+                    }
+                    else if (dungeonRoomTypeArray[i, j] == RoomType.special)
+                    {
+                        roomSource = specialRoomSources[dungeonIntArray[i, j]].texture;
+                    }
+                    for (int k = 0; k < roomHeight; k++)
+                    {
+                        for (int l = 0; l < roomWidth; l++)
                         {
-                            wallTilemap.SetTile(tilePosition, wallTiles);
+                            Vector3Int tilePosition = new Vector3Int(j * roomWidth + l, i * roomHeight + k, 1);
+                            Color pixelColor = roomSource.GetPixel(l, k);
+                            if (pixelColor == Color.black)
+                            {
+                                wallTilemap.SetTile(tilePosition, wallTiles);
+                            }
+                            else if (pixelColor == Color.white)
+                            {
+                                groundTilemap.SetTile(tilePosition, groundTiles);
+                            }
+                            // else if red, spawn enemy and put ground tile
                         }
-                        else if (pixelColor == Color.white)
-                        {
-                            groundTilemap.SetTile(tilePosition, groundTiles);
-                        }
-                        // else if red, spawn enemy and put ground tile
                     }
                 }
             }
@@ -117,31 +133,31 @@ public class DungeonGenerator : MonoBehaviour
             for (int j = 0; j < dungeonIntArray.GetLength(1); j++)
             {
                 // create exits between adjacent rooms
-                if (dungeonIntArray[i, j] != 0)
+                if (dungeonRoomTypeArray[i, j] != RoomType.filled)
                 {
                     // up
-                    if (IsValidSpace(i - 1, j) && dungeonIntArray[i - 1, j] != 0)
+                    if (IsValidSpace(i - 1, j) && dungeonRoomTypeArray[i - 1, j] != RoomType.filled)
                     {
                         Vector3Int pos1 = new Vector3Int(j * roomWidth + roomWidth / 2, i * roomHeight - 1, 1);
-                        CreateExit(pos1, new Vector3Int(-1, 0, 0));
+                        ConnectRoom(pos1, new Vector3Int(-1, 0, 0));
                     }
                     //down
-                    if (IsValidSpace(i + 1, j) && dungeonIntArray[i - 1, j] != 0)
+                    if (IsValidSpace(i + 1, j) && dungeonRoomTypeArray[i + 1, j] != RoomType.filled)
                     {
-                        Vector3Int pos1 = new Vector3Int(j * roomWidth + roomWidth / 2, i * roomHeight, 1);
-                        CreateExit(pos1, new Vector3Int(-1, 0, 0));
+                        Vector3Int pos1 = new Vector3Int(j * roomWidth + roomWidth / 2, (i + 1) * roomHeight, 1);
+                        ConnectRoom(pos1, new Vector3Int(-1, 0, 0));
                     }
                     // left
-                    if (IsValidSpace(i, j - 1) && dungeonIntArray[i, j - 1] != 0)
+                    if (IsValidSpace(i, j - 1) && dungeonRoomTypeArray[i, j - 1] != RoomType.filled)
                     {
                         Vector3Int pos1 = new Vector3Int(j * roomWidth, i * roomHeight + roomHeight / 2, 1);
-                        CreateExit(pos1, new Vector3Int(0, -1, 0));
+                        ConnectRoom(pos1, new Vector3Int(0, -1, 0));
                     }
                     // right
-                    if (IsValidSpace(i, j + 1) && dungeonIntArray[i, j + 1] != 0)
+                    if (IsValidSpace(i, j + 1) && dungeonRoomTypeArray[i, j + 1] != RoomType.filled)
                     {
                         Vector3Int pos1 = new Vector3Int((j + 1) * roomWidth - 1, i * roomHeight + roomHeight / 2, 1);
-                        CreateExit(pos1, new Vector3Int(0, -1, 0));
+                        ConnectRoom(pos1, new Vector3Int(0, -1, 0));
                     }
                 }
             }
@@ -157,7 +173,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         return false;
     }
-    void CreateExit(Vector3Int pos1, Vector3Int add)
+    void ConnectRoom(Vector3Int pos1, Vector3Int add)
     {
         Vector3Int pos2 = pos1 + add;
         wallTilemap.SetTile(pos1, null);

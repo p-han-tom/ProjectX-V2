@@ -246,7 +246,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.25882354, g: 0.31764707, b: 0.41960788, a: 0}
+  m_BackGroundColor: {r: 0.078431375, g: 0.0627451, b: 0.07450981, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1709,18 +1709,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cd35166a7b6b44fadeb9750a9a38fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSources:
-  - {fileID: 21300000, guid: d8d58a1447705544abfd9ae993ba332f, type: 3}
+  filledRoomSource: {fileID: 21300000, guid: d8d58a1447705544abfd9ae993ba332f, type: 3}
+  specialRoomSources:
   - {fileID: 21300000, guid: 3ad71559327319b4c902914482b8a6a7, type: 3}
   - {fileID: 21300000, guid: 9ce510e7a540dac4d801c51b089a90e2, type: 3}
+  roomSources:
+  - {fileID: 21300000, guid: d0a729e588dd8da48b3375834d9bc3e4, type: 3}
+  - {fileID: 21300000, guid: b5d117901993ee242aa1de30e70a6ce1, type: 3}
+  - {fileID: 21300000, guid: 3d6e4109305f74b43b464fc8d7129624, type: 3}
   - {fileID: 21300000, guid: b40e5aec3b413e441a2fe5db7f0fe871, type: 3}
   - {fileID: 21300000, guid: 24adc0855186bd54dafce9670409b35f, type: 3}
   - {fileID: 21300000, guid: 8a5e41b99158ba342bc2993c329ccef1, type: 3}
   - {fileID: 21300000, guid: 1ba7794e3a3deae4da509af5eec10816, type: 3}
   - {fileID: 21300000, guid: 692e9d900f5aab74d892cd8a124a909f, type: 3}
-  - {fileID: 21300000, guid: 3d6e4109305f74b43b464fc8d7129624, type: 3}
-  - {fileID: 21300000, guid: b5d117901993ee242aa1de30e70a6ce1, type: 3}
-  - {fileID: 21300000, guid: d0a729e588dd8da48b3375834d9bc3e4, type: 3}
   wallTiles: {fileID: 11400000, guid: d8268bec73c1da541a87568dc35d743d, type: 2}
   groundTiles: {fileID: 11400000, guid: 8973c8266355e2d41b60f8ed414e1c8f, type: 2}
 --- !u!1 &2130476457
