@@ -50,23 +50,22 @@ public class Player : Entity
         }
         if (ui.isInventoryOpen == false)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) && weapons[0] != null)
             {
                 weapons[0].GetComponent<Active>().Cast(transform, 1);
-
             }
 
-            if (Input.GetKey(KeyCode.Mouse1))
+            if (Input.GetKey(KeyCode.Mouse1) && weapons[1] != null)
             {
                 weapons[1].GetComponent<Active>().Cast(transform, 1);
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && weapons[2] != null)
             {
                 weapons[2].GetComponent<Active>().Cast(transform, 1);
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && weapons[3] != null)
             {
                 weapons[3].GetComponent<Active>().Cast(transform, 1);
             }
