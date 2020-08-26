@@ -43,7 +43,15 @@ public class Grid : MonoBehaviour
                 int checkY = node.gridY + y;
 
                 if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY) {
+                    neighbours.Add(grid[checkX, checkY]);
+
                     if (!grid[checkX, checkY].walkable) {
+                        if (x != 0 && y != 0)
+                            if (!grid[checkX - x, checkY].walkable || !grid[checkX, checkY-y].walkable)
+                                continue;
+                        else if (x == 0 || y == 0)
+                            if (grid[node.gridX - x, node.gridY - y].walkable) continue;
+
                         neighbours.Clear();
                         if (node.gridX - 1 >= 0) neighbours.Add(grid[node.gridX-1, node.gridY]);
                         if (node.gridX + 1 < gridSizeX) neighbours.Add(grid[node.gridX+1, node.gridY]);
@@ -51,7 +59,6 @@ public class Grid : MonoBehaviour
                         if (node.gridY + 1 < gridSizeY) neighbours.Add(grid[node.gridX, node.gridY+1]);
                         return neighbours;
                     }
-                    neighbours.Add(grid[checkX, checkY]);
                 }
             }
         }

@@ -6,7 +6,6 @@ using System;
 public class Pathfinding : MonoBehaviour {
 
 	bool includeStartNode;
-	int asss = 0;
 	PathRequestManager requestManager;
 	Grid grid;
 	
@@ -27,7 +26,6 @@ public class Pathfinding : MonoBehaviour {
 		
 		Node startNode = grid.NodeFromWorldPoint(startPos);
 		includeStartNode = (grid.GetNeighbours(startNode).Count <= 4);
-		asss++;
 
 		Node targetNode = grid.NodeFromWorldPoint(targetPos);
 		
