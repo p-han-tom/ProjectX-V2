@@ -10,11 +10,11 @@ public class CellularAutomata : MonoBehaviour
     Tilemap wallTilemap;
     Tilemap groundTilemap;
     int mapWidth = 80;
-    int mapHeight = 50;
+    int mapHeight = 100;
     string seed;
     [Range(0, 100)]
-    int randomFillPercent = 35;
-    int smoothIterations = 5;
+    int randomFillPercent = 30;
+    int smoothIterations = 10;
     int[,] mapArray;
     int[,] mapArrayNew;
     void Start()
@@ -41,7 +41,7 @@ public class CellularAutomata : MonoBehaviour
         {
             for (int j = 0; j < mapArray.GetLength(1); j++)
             {
-                if (j == 0 || j == mapWidth - 1 || i == 0 || i == mapHeight - 1)
+                if (j == 0 || j == 1 || j == mapWidth - 1 || j == mapWidth - 2 || i == 0 || i == mapHeight - 1 || i == 1 || i == mapHeight - 2)
                 {
                     mapArray[i, j] = 1;
                 }
@@ -94,9 +94,9 @@ public class CellularAutomata : MonoBehaviour
             }
         }
     }
-    bool IsValidSpace(int col, int row)
+    bool IsValidSpace(int row, int col)
     {
-        if (col < mapArray.GetLength(0) && col >= 0 && row < mapArray.GetLength(1) && row >= 0)
+        if (col < mapWidth && col >= 0 && row < mapHeight && row >= 0)
         {
             return true;
         }
@@ -111,9 +111,10 @@ public class CellularAutomata : MonoBehaviour
             {
                 if (IsValidSpace(i, j))
                 {
-                    if (i != row && j != col)
+                    if (i != col || j != row)
                     {
-                        counter += mapArray[i, j];
+                        if (mapArray[i, j] == 1)
+                            counter++;
                     }
                 }
                 else
@@ -125,3 +126,4 @@ public class CellularAutomata : MonoBehaviour
         return counter;
     }
 }
+

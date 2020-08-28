@@ -150,9 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673aa1826e0894b4c90790447cc0ef1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallTile: {fileID: 11400000, guid: d8268bec73c1da541a87568dc35d743d, type: 2}
-  groundTile: {fileID: 11400000, guid: 2ed64027b039ba9469e1362e4e8ee41c, type: 2}
+  width: 80
+  height: 100
   seed: 
+  useRandomSeed: 0
+  randomFillPercent: 35
 --- !u!4 &183220750
 Transform:
   m_ObjectHideFlags: 0
@@ -1727,7 +1729,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
