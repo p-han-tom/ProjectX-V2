@@ -10,13 +10,14 @@ public class CellularAutomata : MonoBehaviour
     Tilemap wallTilemap;
     Tilemap groundTilemap;
     int mapWidth = 80;
-    int mapHeight = 50;
+    int mapHeight = 100;
     string seed;
-    [Range(0, 100)]
-    int randomFillPercent = 35;
-    int smoothIterations = 5;
+    int randomFillPercent = 30;
+    int smoothIterations = 10;
+    int buildingAttempts = 50;
     int[,] mapArray;
     int[,] mapArrayNew;
+    public Sprite[] sprites;
     void Start()
     {
         groundTilemap = GameObject.Find("Grid").transform.Find("Ground").GetComponent<Tilemap>();
@@ -35,13 +36,18 @@ public class CellularAutomata : MonoBehaviour
         mapArray = new int[mapHeight, mapWidth];
         mapArrayNew = new int[mapHeight, mapWidth];
 
-        if (seed == null || seed == "") seed = Time.time.ToString();
+        if (seed == null || seed == "")
+        {
+            seed = System.DateTime.Now.ToString();
+            Debug.Log("Using random seed: " + seed);
+        }
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
+
         for (int i = 0; i < mapArray.GetLength(0); i++)
         {
             for (int j = 0; j < mapArray.GetLength(1); j++)
             {
-                if (j == 0 || j == mapWidth - 1 || i == 0 || i == mapHeight - 1)
+                if (j == 0 || j == 1 || j == mapWidth - 1 || j == mapWidth - 2 || i == 0 || i == mapHeight - 1 || i == 1 || i == mapHeight - 2)
                 {
                     mapArray[i, j] = 1;
                 }
@@ -52,8 +58,9 @@ public class CellularAutomata : MonoBehaviour
             }
         }
         SmoothMap();
+        PlaceBuildings();
         DrawTiles();
-        GameObject.Find("Player").transform.position = new Vector3(mapWidth / 2, mapHeight / 2, 1);
+        GameObject.Find("Player").transform.position = new Vector3(mapWidth / 2, mapHeight/2, 1);
         Camera.main.GetComponent<CameraControl>().TeleportToLeader();
     }
     void SmoothMap()
@@ -75,7 +82,48 @@ public class CellularAutomata : MonoBehaviour
             mapArray = mapArrayNew;
         }
     }
-
+    void PlaceBuildings()
+    {
+        for (int a = 0; a < buildingAttempts; a++)
+        {
+            Texture2D randomBuildingTexture = sprites[Random.Range(0, sprites.Length)].texture;
+            int[,] buildingArray = new int[randomBuildingTexture.height, randomBuildingTexture.width];
+            for (int i = 0; i < buildingArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < buildingArray.GetLength(1); j++)
+                {
+                    buildingArray[i, j] = (randomBuildingTexture.GetPixel(j, i) == Color.black) ? 1 : 0;
+                }
+            }
+            int rotations = Random.Range(0, 4);
+            int randomx = Random.Range(0, mapWidth);
+            int randomy = Random.Range(0, mapHeight);
+            bool isClear = true;
+            for (int checkY = 0; checkY < buildingArray.GetLength(0); checkY++)
+            {
+                for (int checkX = 0; checkX < buildingArray.GetLength(1); checkX++)
+                {
+                    if (!IsValidSpace(checkY + randomy, checkX + randomx) || mapArray[checkY + randomy, checkX + randomx] == 1)
+                    {
+                        isClear = false;
+                        Debug.Log("NOT CLEAR!");
+                        break;
+                    }
+                }
+                if (isClear == false) break;
+            }
+            if (isClear == true)
+            {
+                for (int checkY = 0; checkY < buildingArray.GetLength(0); checkY++)
+                {
+                    for (int checkX = 0; checkX < buildingArray.GetLength(1); checkX++)
+                    {
+                        mapArray[checkY + randomy, checkX + randomx] = buildingArray[checkY, checkX];
+                    }
+                }
+            }
+        }
+    }
     void DrawTiles()
     {
         for (int i = 0; i < mapArray.GetLength(0); i++)
@@ -94,9 +142,9 @@ public class CellularAutomata : MonoBehaviour
             }
         }
     }
-    bool IsValidSpace(int col, int row)
+    bool IsValidSpace(int row, int col)
     {
-        if (col < mapArray.GetLength(0) && col >= 0 && row < mapArray.GetLength(1) && row >= 0)
+        if (col < mapWidth && col >= 0 && row < mapHeight && row >= 0)
         {
             return true;
         }
@@ -111,9 +159,10 @@ public class CellularAutomata : MonoBehaviour
             {
                 if (IsValidSpace(i, j))
                 {
-                    if (i != row && j != col)
+                    if (i != col || j != row)
                     {
-                        counter += mapArray[i, j];
+                        if (mapArray[i, j] == 1)
+                            counter++;
                     }
                 }
                 else
@@ -125,3 +174,4 @@ public class CellularAutomata : MonoBehaviour
         return counter;
     }
 }
+
