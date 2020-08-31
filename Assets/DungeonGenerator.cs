@@ -8,19 +8,25 @@ public class DungeonGenerator : MonoBehaviour
     public Sprite filledRoomSource;
     public Sprite[] specialRoomSources;
     public Sprite[] roomSources;
+
     public RuleTile wallTiles;
     public Tile groundTiles;
+
     int roomWidth = 20;
     int roomHeight = 16;
+
     enum Direction { up, down, left, right }
     enum RoomType { normal, special, filled } // maybe prefab room type for special rooms
     int[,] dungeonIntArray = new int[10, 10];
     RoomType[,] dungeonRoomTypeArray;
+
     int numberOfRooms = 6;
     int numberOfWalkers = 2;
     int walkerLifespan = 4;
+
     Tilemap wallTilemap;
     Tilemap groundTilemap;
+
     void Start()
     {
         groundTilemap = GameObject.Find("Grid").transform.Find("Ground").GetComponent<Tilemap>();
@@ -30,6 +36,7 @@ public class DungeonGenerator : MonoBehaviour
         AddRooms();
         DrawTiles();
     }
+
     void FillWithWalls()
     {
         for (int i = 0; i < dungeonIntArray.GetLength(0); i++)
@@ -41,6 +48,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+
     void AddRooms()
     {
         // Start room
@@ -91,6 +99,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+
     void DrawTiles()
     {
         for (int i = 0; i < dungeonIntArray.GetLength(0); i++)
@@ -128,10 +137,9 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < dungeonIntArray.GetLength(0); i++)
-        {
-            for (int j = 0; j < dungeonIntArray.GetLength(1); j++)
-            {
+
+        for (int i = 0; i < dungeonIntArray.GetLength(0); i++) {
+            for (int j = 0; j < dungeonIntArray.GetLength(1); j++) {
                 // create exits between adjacent rooms
                 if (dungeonRoomTypeArray[i, j] != RoomType.filled)
                 {
@@ -163,8 +171,11 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+
     int RandomRoomIndex() { return Random.Range(3, roomSources.Length); }
+
     Direction RandomDirection() { return (Direction)Random.Range(0, 4); }
+
     bool IsValidSpace(int col, int row)
     {
         if (col < dungeonIntArray.GetLength(0) && col >= 0 && row < dungeonIntArray.GetLength(1) && row >= 0)
@@ -173,6 +184,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         return false;
     }
+
     void ConnectRoom(Vector3Int pos1, Vector3Int add)
     {
         Vector3Int pos2 = pos1 + add;
