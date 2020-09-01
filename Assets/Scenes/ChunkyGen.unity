@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 8821980384446282934, guid: a5a2a4f331cbe60469b82c958502f7cf, type: 3}
-  chunkDimensions: {x: 4, y: 4}
+  chunkDimensions: {x: 20, y: 20}
   testStructure: {fileID: 8560605522684083320, guid: fdd049c8a2c6c154db607eb38d370d02,
     type: 3}
   testSmallStructure: {fileID: 6444758570091597072, guid: 62acc0341ba0dfa47a5794561d82e93c,
