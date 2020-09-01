@@ -18,4 +18,10 @@ public class StructureSpawnpoint : MonoBehaviour
         
     }
 
+    void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Structure")) {
+            canSpawn = false;
+        }
+    }
+
 }

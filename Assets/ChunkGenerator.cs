@@ -17,6 +17,8 @@ public class ChunkGenerator : MonoBehaviour
     // Structures
     public GameObject testStructure;
     public GameObject testSmallStructure;
+    bool spawningLargeStructures;
+    bool spawningSmallStructures;
 
     void Start()
     {
@@ -30,15 +32,19 @@ public class ChunkGenerator : MonoBehaviour
                 chunks[x, y] = Instantiate(chunk, new Vector3(x*chunkSize, y*chunkSize, 0), Quaternion.identity);
             }
         }
-        SpawnLargeStructures();
-        SpawnSmallStructures();
+        StartCoroutine("SpawnLargeStructures");
+        StartCoroutine("SpawnSmallStructures", 2f);
         
     }
 
 
-    void SpawnLargeStructures() {
+    IEnumerator SpawnLargeStructures() {
+
+        spawningLargeStructures = true;
+
         // Fill chunks with structures
         foreach (GameObject chunk in chunks) {
+
             // Spawn room or large structure if possible
             int roomSpawnRate = (int) Random.Range(1,11);
             int spawnIndex = (int) Random.Range(0,chunk.transform.childCount);
@@ -53,22 +59,30 @@ public class ChunkGenerator : MonoBehaviour
             Vector3 spawnpointPos = chunk.transform.GetChild(spawnIndex).position;
             Vector3 roomSpawnPos = new Vector3(spawnpointPos.x + rndOffsetX, spawnpointPos.y + rndOffsetY, 0);
 
+
             // Randomly spawn room on current chunk
-            if (roomSpawnRate <= 5) {
+            if (roomSpawnRate <= 1 && chunk.transform.GetChild(spawnIndex).GetComponent<StructureSpawnpoint>().canSpawn) {
                 Instantiate(testStructure, roomSpawnPos, Quaternion.identity);
-                chunk.transform.GetChild(spawnIndex).GetComponent<StructureSpawnpoint>().canSpawn = false;
+                yield return new WaitUntil(() => !chunk.transform.GetChild(spawnIndex).GetComponent<StructureSpawnpoint>().canSpawn);
             }
         }
+
+        spawningLargeStructures = false;
     }
 
-    void SpawnSmallStructures() {
+    IEnumerator SpawnSmallStructures() {
+
+        while (spawningLargeStructures)
+            yield return new WaitForFixedUpdate();
+
         foreach (GameObject chunk in chunks) {
             foreach (Transform spawnpoint in chunk.transform) {
                 if (spawnpoint.GetComponent<StructureSpawnpoint>().canSpawn) {
-
                     int structuresToSpawn = (int) Random.Range(0,2);
                     for (int i = 0; i < structuresToSpawn; i ++) {
                         // TODO: Get random structure
+
+
                         Vector2 structureSize = testStructure.GetComponent<BoxCollider2D>().size;
                         float rndOffsetY =Random.Range(-spawnpointRadius+structureSize.y,spawnpointRadius-structureSize.y);
                         float rndOffsetX =Random.Range(-spawnpointRadius+structureSize.x,spawnpointRadius-structureSize.x);
