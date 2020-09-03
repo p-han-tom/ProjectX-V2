@@ -404,7 +404,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: aa65218166b13fd49bb925e3044d85bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -559,7 +559,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -653,11 +653,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 8821980384446282934, guid: a5a2a4f331cbe60469b82c958502f7cf, type: 3}
-  chunkDimensions: {x: 20, y: 20}
-  testStructure: {fileID: 8560605522684083320, guid: fdd049c8a2c6c154db607eb38d370d02,
-    type: 3}
-  testSmallStructure: {fileID: 6444758570091597072, guid: 62acc0341ba0dfa47a5794561d82e93c,
-    type: 3}
+  gridDimensions: {x: 10, y: 10}
+  largeStructures:
+  - {fileID: 11400000, guid: 51982b6181a2eba47aaf285ecd3a909f, type: 2}
+  - {fileID: 11400000, guid: 7bc8f536ef835f24480d37fa92704ce2, type: 2}
+  smallStructures:
+  - {fileID: 11400000, guid: 9ad789c6fa8b7a042bef9d4f7a9a35a4, type: 2}
+  - {fileID: 11400000, guid: e971379e68c3e8142a6fc4a3668fa517, type: 2}
 --- !u!1 &1803570008
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 160535891461918597, guid: ffe2f20134f18df4289ca823df02d2fa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 160535891461918598, guid: ffe2f20134f18df4289ca823df02d2fa,
         type: 3}

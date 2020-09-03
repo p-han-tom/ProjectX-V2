@@ -594,8 +594,9 @@ GameObject:
   - component: {fileID: 8560605522684083321}
   - component: {fileID: 2132379630602033173}
   - component: {fileID: 6451500531253469368}
+  - component: {fileID: 7032617624950812962}
   m_Layer: 12
-  m_Name: Room
+  m_Name: Small Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -676,6 +677,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7032617624950812962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8560605522684083320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e54e76582c0e54287eecfff42a35f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8560605522868438597
 GameObject:
   m_ObjectHideFlags: 0

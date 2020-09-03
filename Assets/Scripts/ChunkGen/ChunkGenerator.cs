@@ -7,7 +7,7 @@ public class ChunkGenerator : MonoBehaviour
 
     // Chunk
     public GameObject chunk; 
-    public Vector2 chunkDimensions;
+    public Vector2 gridDimensions;
 
     GameObject[,] chunks;
     Vector2 worldSize;
@@ -15,25 +15,26 @@ public class ChunkGenerator : MonoBehaviour
     float spawnpointRadius = 2;
 
     // Structures
-    public GameObject testStructure;
-    public GameObject testSmallStructure;
+    public Structure[] largeStructures;
+    public Structure[] smallStructures;
+
     bool spawningLargeStructures;
     bool spawningSmallStructures;
 
     void Start()
     {
-        worldSize.x = (int) chunkDimensions.x * chunkSize;
-        worldSize.y = (int) chunkDimensions.y * chunkSize;
+        worldSize.x = (int) gridDimensions.x * chunkSize;
+        worldSize.y = (int) gridDimensions.y * chunkSize;
 
         // Generate empty chunks
-        chunks = new GameObject[(int)chunkDimensions.x, (int)chunkDimensions.y];
+        chunks = new GameObject[(int)gridDimensions.x, (int)gridDimensions.y];
         for (int x = 0; x < chunks.GetLength(0); x ++) {
             for (int y = 0; y < chunks.GetLength(1); y ++) {
                 chunks[x, y] = Instantiate(chunk, new Vector3(x*chunkSize, y*chunkSize, 0), Quaternion.identity);
             }
         }
         StartCoroutine("SpawnLargeStructures");
-        StartCoroutine("SpawnSmallStructures", 2f);
+        StartCoroutine("SpawnSmallStructures");
         
     }
 
@@ -49,9 +50,10 @@ public class ChunkGenerator : MonoBehaviour
             int roomSpawnRate = (int) Random.Range(1,11);
             int spawnIndex = (int) Random.Range(0,chunk.transform.childCount);
 
-            // TODO: Get random large structure
+            // Get random large structure
+            GameObject roomToSpawn = largeStructures[(int) Random.Range(0, largeStructures.Length)].structure;
 
-            Vector2 structureSize = testStructure.GetComponent<BoxCollider2D>().size;
+            Vector2 structureSize = roomToSpawn.GetComponent<BoxCollider2D>().size;
 
             // Get random spawn position within chunk if possible
             float rndOffsetY = (structureSize.y <= spawnpointRadius) ? Random.Range(-spawnpointRadius+structureSize.y,spawnpointRadius-structureSize.y) : 0;
@@ -59,10 +61,9 @@ public class ChunkGenerator : MonoBehaviour
             Vector3 spawnpointPos = chunk.transform.GetChild(spawnIndex).position;
             Vector3 roomSpawnPos = new Vector3(spawnpointPos.x + rndOffsetX, spawnpointPos.y + rndOffsetY, 0);
 
-
             // Randomly spawn room on current chunk
-            if (roomSpawnRate <= 1 && chunk.transform.GetChild(spawnIndex).GetComponent<StructureSpawnpoint>().canSpawn) {
-                Instantiate(testStructure, roomSpawnPos, Quaternion.identity);
+            if (roomSpawnRate <= 5 && chunk.transform.GetChild(spawnIndex).GetComponent<StructureSpawnpoint>().canSpawn) {
+                Instantiate(roomToSpawn, roomSpawnPos, Quaternion.identity);
                 yield return new WaitUntil(() => !chunk.transform.GetChild(spawnIndex).GetComponent<StructureSpawnpoint>().canSpawn);
             }
         }
@@ -78,24 +79,24 @@ public class ChunkGenerator : MonoBehaviour
         foreach (GameObject chunk in chunks) {
             foreach (Transform spawnpoint in chunk.transform) {
                 if (spawnpoint.GetComponent<StructureSpawnpoint>().canSpawn) {
+                    // Get random chance to spawn
                     int structuresToSpawn = (int) Random.Range(0,2);
                     for (int i = 0; i < structuresToSpawn; i ++) {
-                        // TODO: Get random structure
+                        // Get random structure
+                        GameObject structToSpawn = smallStructures[(int) Random.Range(0, smallStructures.Length)].structure;
 
 
-                        Vector2 structureSize = testStructure.GetComponent<BoxCollider2D>().size;
-                        float rndOffsetY =Random.Range(-spawnpointRadius+structureSize.y,spawnpointRadius-structureSize.y);
-                        float rndOffsetX =Random.Range(-spawnpointRadius+structureSize.x,spawnpointRadius-structureSize.x);
+                        // Get random position within spawnpoint radius and instantiate structure
+                        Vector2 structureSize = structToSpawn.GetComponent<BoxCollider2D>().size;
+                        Debug.Log(structureSize);
+                        float rndOffsetY = Random.Range(-spawnpointRadius+structureSize.y/2,spawnpointRadius-structureSize.y/2);
+                        float rndOffsetX = Random.Range(-spawnpointRadius+structureSize.x/2,spawnpointRadius-structureSize.x/2);
                         Vector3 spawnPos = new Vector3(spawnpoint.position.x + rndOffsetX, spawnpoint.position.y + rndOffsetY, 0);
 
-                        Instantiate(testSmallStructure, spawnPos, Quaternion.identity);
+                        Instantiate(structToSpawn, spawnPos, Quaternion.identity);
                     }
                 }
             }
         }
-    }
-
-    void SpawnDecorations() {
-
     }
 }
